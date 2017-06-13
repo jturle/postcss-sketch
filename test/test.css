@@ -1,0 +1,7 @@
+h1 {
+    font: sketch('./source.sketch').textStyle.Heading_H1;
+}
+
+h2 {
+    font: sketch('./source.sketch').textStyle.Heading_H2;
+}

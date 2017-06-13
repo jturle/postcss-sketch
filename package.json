@@ -1,0 +1,33 @@
+{
+  "name": "postcss-sketch",
+  "version": "1.0.0",
+  "description": "Playing with new sketch format...",
+  "main": "lib/index.js",
+  "repository": "git@github.com:3rdCompany/postcss-sketch.git",
+  "author": "James Turle <james@foyerlive.com>",
+  "license": "MIT",
+  "dependencies": {
+    "md5": "^2.2.1",
+    "postcss-calc": "^6.0.0",
+    "postcss-cli": "^4.1.0",
+    "postcss-custom-properties": "^6.0.1"
+  },
+  "scripts": {
+    "build": "babel -d lib/ src/",
+    "build:watch": "babel -w -d lib/ src/",
+    "test": "postcss test/test.css -o ./output.css"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-1"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-1": "^6.24.1",
+    "postcss-selector-parser": "^2.2.3",
+    "postcss-value-parser": "^3.3.0"
+  }
+}
