@@ -15,7 +15,7 @@
   "scripts": {
     "build": "babel -d lib/ src/",
     "build:watch": "babel -w -d lib/ src/",
-    "test": "postcss test/test.css -o ./output.css"
+    "test": "postcss test/test.css -o ./test/output.css"
   },
   "babel": {
     "presets": [
