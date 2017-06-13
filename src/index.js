@@ -112,7 +112,7 @@ module.exports = plugin('postcss-backwards', (opts) => {
                 switch( fill.gradient.gradientType )
                 {
                   case 0:
-                    gradRule = 'linear-gradient(-90deg, ';
+                    gradRule = 'linear-gradient(90deg, ';
                     break;
                   case 1:
                     console.log('Radial', fill );
