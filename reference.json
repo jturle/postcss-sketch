@@ -1,0 +1,54 @@
+Unknown command ‘./test/source_current.sketch’
+
+Usage: sketchtool <command> [<args>]
+                  [--formats=<string> | -f <string>]
+                  [--use-id-for-name{=YES|NO} | --no-use-id-for-name | -n {<YES|NO>}]
+                  [--context=<string> | -C <string>]
+                  [--application=<path> | -A <path>]
+                  [--max-size=<float> | -m <float>]
+                  [--item=<string> | -i <string>]
+                  [--items=<string> | -a <string>]
+                  [--background=<string> | -g <string>]
+                  [--compression=<float> | -c <float>]
+                  [--new-instance{=YES|NO} | --no-new-instance | -N {<YES|NO>}]
+                  [--reveal{=YES|NO} | --no-reveal | -r {<YES|NO>}]
+                  [--timeout=<float> | -T <float>]
+                  [--include-symbols{=YES|NO} | --no-include-symbols | -I {<YES|NO>}]
+                  [--bounds=<rectangle> | -b <rectangle>]
+                  [--outputJSON=<path> | -J <path>]
+                  [--filename=<string> | -F <string>]
+                  [--wait-for-exit{=YES|NO} | --no-wait-for-exit | -W {<YES|NO>}]
+                  [--scales=<path> | -s <path>] [--version | -v]
+                  [--compact{=YES|NO} | --no-compact | -k {<YES|NO>}]
+                  [--overwriting{=YES|NO} | --no-overwriting | -V {<YES|NO>}]
+                  [--group-contents-only{=YES|NO} | --no-group-contents-only | -G {<YES|NO>}]
+                  [--trimmed{=YES|NO} | --no-trimmed | -t {<YES|NO>}]
+                  [--help | -h]
+                  [--progressive{=YES|NO} | --no-progressive | -p {<YES|NO>}]
+                  [--save-for-web{=YES|NO} | --no-save-for-web | -w {<YES|NO>}]
+                  [--output=<path> | -o <path>]
+
+Commands:
+	dump                 Dump out the structure of a document as JSON.
+
+	export artboards     Export one or more artboards
+	export layers        Export one or more layers
+	export pages         Export an area from one or more pages
+	export preview       Export a preview image for a document
+	export slices        Export one or more slices
+
+	help                 Show this help message.
+
+	list artboards       List information on the document's artboards.
+	list formats         List the supported export formats.
+	list layers          List information on all of the document's layers.
+	list pages           List information on the document's pages.
+	list slices          List information on the document's slices.
+
+	metadata             List the metadata for a document.
+	notes                Output the release notes.
+	run                  Run a command from a plugin, inside Sketch.
+	show                 Show the location of the various sketch folders.
+
+
+See ‘sketchtool help <command>’ for more information on a specific command.
