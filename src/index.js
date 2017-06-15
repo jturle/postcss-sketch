@@ -6,7 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import md5 from 'md5';
 
-const cache = [];
+let cache = [];
 
 const getSketchJSON = (file) => {
 
@@ -64,12 +64,17 @@ const convUnit = (unit) => {
  * @returns {string}
  */
 const percentUnit = (unit) => {
-  return Math.round( unit * 100 ) + '%';
+  return Math.round(unit * 100) + '%';
 };
 
 module.exports = plugin('postcss-backwards', (opts) => {
   opts = opts || {};
   return (css, result) => {
+
+    // Clear cache every run
+    cache = [];
+
+    let addedDep = false;
 
     // Runs through all of the nodes (declorations) in the file
     css.walkDecls(decl => {
@@ -77,12 +82,17 @@ module.exports = plugin('postcss-backwards', (opts) => {
         // console.log('DECL',decl);
         var parsedValue = valueParser(decl.value);
         let file = parsedValue.nodes[0].nodes[0].value;
-        if( file == 'url' )
-        {
+        if (file == 'url') {
           file = parsedValue.nodes[0].nodes[0].nodes[0].value;
         }
 
         let fileRef = path.join(path.dirname(decl.source.input.file), file);
+
+        // Add a dependency.
+        if (!addedDep) {
+          result.messages.push({type: 'dependency', file: fileRef, parent: css.source.input.file});
+          addedDep = true;
+        }
 
         if (parsedValue.nodes[1].value.indexOf('.sharedStyle') == 0) {
           let sharedStyleName = parsedValue.nodes[1].value.substr(13);
@@ -114,24 +124,23 @@ module.exports = plugin('postcss-backwards', (opts) => {
 
               if (fill.fillType == 1) { // Gradient
                 let gradRule;
-                switch( fill.gradient.gradientType )
-                {
+                switch (fill.gradient.gradientType) {
                   case 0:
                     gradRule = 'linear-gradient(90deg, ';
                     break;
                   case 1:
                     // console.log('Radial', fill );
                     /* Rectangle:
-                    background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
+                     background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
                     gradRule = 'radial-gradient(' + percentUnit(fill.gradient.from.x) + ' ' + percentUnit(fill.gradient.to.y) + ', ';
                     break;
                 }
-                fill.gradient.stops.forEach((stop,idx) => {
+                fill.gradient.stops.forEach((stop, idx) => {
                   // if( fill.gradient.gradientType == 1 )
                   //console.log(stop);
-                  if( idx > 0 )
+                  if (idx > 0)
                     gradRule += ', ';
-                  gradRule += stop.color.value + ' ' + Math.round( stop.position * 100 ) + '%';
+                  gradRule += stop.color.value + ' ' + Math.round(stop.position * 100) + '%';
                 });
                 gradRule += ')';
                 decl.cloneBefore({
