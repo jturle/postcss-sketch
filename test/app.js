@@ -17,6 +17,8 @@ class App extends React.Component {
         <div className={styles.headerBar2}>I will be styled as a header bar...</div>
         <br/>
         <div className={styles.headerBar3}>I will be styled as a header bar...</div>
+        <br/>
+        <div className={styles.test}></div>
         <Menu/>
       </div>
     )

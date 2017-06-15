@@ -1,25 +1,19 @@
 {
   "name": "postcss-sketch",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Playing with new sketch format...",
   "main": "lib/index.js",
-  "repository": "git@github.com:3rdCompany/postcss-sketch.git",
-  "author": "James Turle <james@foyerlive.com>",
+  "repository": "git@github.com:jturle/postcss-sketch.git",
+  "author": "James Turle <james@3rdcompany.com>",
   "license": "MIT",
   "dependencies": {
-    "md5": "^2.2.1",
-    "null-loader": "^0.1.1",
-    "postcss-calc": "^6.0.0",
-    "postcss-cli": "^4.1.0",
-    "postcss-custom-properties": "^6.0.1",
-    "webpack": "^2.6.1"
   },
   "scripts": {
     "build": "babel -d lib/ src/",
     "build:watch": "babel -w -d lib/ src/",
     "test": "postcss test/test.css -o ./test/output.css",
-    "start": "",
-    "dev": "webpack-dev-server --hot"
+    "test:watch": "postcss test/test.css -o ./test/output.css -w",
+    "dev": "webpack-dev-server --hot --watch"
   },
   "babel": {
     "presets": [
@@ -59,15 +53,22 @@
     "babel-preset-stage-1": "^6.24.1",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
-    "postcss-loader": "^2.0.6",
+    "md5": "^2.2.1",
+    "null-loader": "^0.1.1",
+    "postcss-calc": "^6.0.0",
+    "postcss-cli": "^4.1.0",
+    "postcss-custom-properties": "^6.0.1",
+    "postcss-loader": "^2.0.5",
     "postcss-selector-parser": "^2.2.3",
     "postcss-value-parser": "^3.3.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "react": "^15.6.0",
+    "react-dom": "^15.6.0",
     "react-transform-hmr": "^1.0.4",
     "style-loader": "^0.18.2",
+    "url-loader": "^0.5.9",
     "watch": "^1.0.2",
     "watchfile-webpack-plugin": "^0.0.4",
+    "webpack": "^2.6.1",
     "webpack-dev-server": "2",
     "webpack-hot-middleware": "^2.18.0"
   }

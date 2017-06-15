@@ -3,7 +3,6 @@ const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    // "webpack-hot-middleware/client?reload=true",
     './test/app.js',
   ],
   output: {
@@ -14,9 +13,6 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, './test'),  // New
   },
-  plugins: [
-    // new webpack.HotModuleReplacementPlugin()
-  ],
   module: {
     rules: [
       {
@@ -42,13 +38,13 @@ module.exports = {
             loader: "postcss-loader"
           }
         ]
-      },
-      {
-        test: /\.sketch$/,
-        use: [
-          "null-loader"
-        ]
       }
+      // {
+      //   test: /\.sketch$/,
+      //   use: [
+      //     "url-loader",
+      //   ]
+      // }
     ],
   },
 };

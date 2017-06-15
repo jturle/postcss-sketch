@@ -73,10 +73,15 @@ module.exports = plugin('postcss-backwards', (opts) => {
 
     // Runs through all of the nodes (declorations) in the file
     css.walkDecls(decl => {
-      if (decl.value.indexOf('sketch') !== -1) {
-
+      if (decl.value.indexOf('sketch(') !== -1) {
+        // console.log('DECL',decl);
         var parsedValue = valueParser(decl.value);
         let file = parsedValue.nodes[0].nodes[0].value;
+        if( file == 'url' )
+        {
+          file = parsedValue.nodes[0].nodes[0].nodes[0].value;
+        }
+
         let fileRef = path.join(path.dirname(decl.source.input.file), file);
 
         if (parsedValue.nodes[1].value.indexOf('.sharedStyle') == 0) {

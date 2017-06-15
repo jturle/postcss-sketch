@@ -3,10 +3,6 @@
     padding: 2rem;
 }
 
-.test {
-    background-image:url('./source_current.sketch');
-}
-
 h1 {
     font: sketch('./source_current.sketch').textStyle.Heading_H1;
 }
