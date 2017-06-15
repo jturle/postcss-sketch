@@ -1,0 +1,5 @@
+.menuContainer {
+    &:global( .ui.menu ) {
+        extends: sketch('../source_current.sketch').sharedStyle.HeaderBar;
+    }
+}

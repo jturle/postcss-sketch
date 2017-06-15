@@ -1,5 +1,9 @@
 module.exports = (ctx) => ({
   plugins: [
-    require("../lib")()
+    require("postcss-flexbugs-fixes")(),
+    require("postcss-custom-properties")(),
+    require("postcss-calc")(),
+    require("postcss-cssnext")(),
+    require("../lib")(),
   ]
 });

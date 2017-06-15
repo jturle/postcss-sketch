@@ -24,6 +24,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
+        exclude: [/node_modules/],
         use: [
           "style-loader",
           {
@@ -38,13 +39,24 @@ module.exports = {
             loader: "postcss-loader"
           }
         ]
+      },
+      {
+        test: /\.css$/,
+        include: [/node_modules/],
+        use: [
+          "style-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: false
+            }
+          }
+        ]
+      },
+      {
+        test: /\.(ttf|eot|woff2?|svg|png|jpe?g|gif|eot)(\?.*)?$/, //the last ? part is for query strings in eg font awesome
+        loader: "url-loader?limit=10000000" // Inline for JT
       }
-      // {
-      //   test: /\.sketch$/,
-      //   use: [
-      //     "url-loader",
-      //   ]
-      // }
-    ],
-  },
+    ]
+  }
 };
