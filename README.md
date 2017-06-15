@@ -1,7 +1,12 @@
 # postcss-sketch
 Just playing with pulling Sketch colours, styles etc directly into postcss references.
 
-Please ignore the horrible examples etc.
+Please ignore the horrible design in the examples etc.
+
+## Currently Supports
+
+- textStyles (font, size, color)
+- sharedStyles (opacity, background, border)
 
 ## POC for text styles atm...
 
@@ -62,7 +67,7 @@ h2 {
 
 ## Try it?
 
-npm install 3rdCompany/postcss-sketch
+`npm install 3rdCompany/postcss-sketch`
 
 Add the plugin to the postcss configuration.
 
