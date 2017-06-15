@@ -1,6 +1,8 @@
 # postcss-sketch
 Just playing with pulling Sketch colours, styles etc directly into postcss references.
 
+Please ignore the horrible examples etc.
+
 ## POC for text styles atm...
 
 ```css
@@ -58,4 +60,16 @@ h2 {
 
 ![Image of Sketch file](./doc/source_current.png)
 
-## Requires Sketch Beta...
+## Try it?
+
+npm install 3rdCompany/postcss-sketch
+
+Add the plugin to the postcss configuration.
+
+```js
+module.exports = (ctx) => ({
+  plugins: [
+    require("postcss-sketch")()
+  ]
+});
+```
