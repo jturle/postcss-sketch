@@ -74,6 +74,7 @@ Add the plugin to the postcss configuration.
 ```js
 module.exports = (ctx) => ({
   plugins: [
+    require("postcss-cssnext")(),
     require("postcss-sketch")()
   ]
 });
