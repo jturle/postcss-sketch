@@ -46,6 +46,9 @@ const convRGBA = (string) => {
   x[1] = Math.round(x[1]);
   x[2] *= 255;
   x[2] = Math.round(x[2]);
+  if (x[3]) {
+    x[3] = Math.round(x[3] * 100) / 100;
+  }
   return 'rgba(' + x.join(',') + ')';
 };
 
@@ -67,6 +70,92 @@ const percentUnit = (unit) => {
   return Math.round(unit * 100) + '%';
 };
 
+const extractBackground = (fill) => {
+  if (fill.fillType == 0) { // Background-color
+    return {
+      prop: 'background-color',
+      value: _.get(fill, 'color.value')
+    };
+  }
+
+  if (fill.fillType == 1) { // Gradient
+    let gradRule;
+    switch (fill.gradient.gradientType) {
+      case 0:
+        gradRule = 'linear-gradient(0deg, ';
+        break;
+      case 1:
+        // console.log('Radial', fill );
+        /* Rectangle:
+         background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
+        gradRule = 'radial-gradient(' + percentUnit(fill.gradient.from.x) + ' ' + percentUnit(fill.gradient.to.y) + ', ';
+        break;
+    }
+    fill.gradient.stops.forEach((stop, idx) => {
+      // if( fill.gradient.gradientType == 1 )
+      //console.log(stop);
+      if (idx > 0)
+        gradRule += ', ';
+      gradRule += stop.color.value + ' ' + Math.round(stop.position * 100) + '%';
+    });
+    gradRule += ')';
+    return {
+      prop: 'background-image',
+      value: gradRule
+    };
+  }
+
+  return {prop: 'background', value: 'transparent'}
+};
+
+const extractBorder = (border) => {
+  return {
+    prop: 'border',
+    value: convUnit(_.get(border, 'thickness')) + ' solid ' + _.get(border, 'color.value')
+  };
+};
+
+const sketchLayerToMixed = (layer, parent, nest = true) => {
+  // parent.append({prop: '-ref', value: layer.name});
+  if (layer.hasBackgroundColor && layer.includeBackgroundColorInExport) {
+    parent.append({prop: 'background-color', value: layer.backgroundColor.value});
+  } else {
+    // Background/Fills
+    if (layer.style && layer.style.fills.length && _.find(layer.style.fills, ['isEnabled', 1])) {
+      parent.append(extractBackground(_.find(layer.style.fills, ['isEnabled', 1])));
+    }
+  }
+  if (nest && layer.layers) {
+    layer.layers.forEach((childLayer) => {
+      if (['text', 'container'].indexOf(childLayer.name) == -1) {
+        let newParent = parent.cloneBefore();
+        newParent.removeAll();
+        newParent.selector += ' :global(.' + childLayer.name + ')';
+        sketchLayerToMixed(childLayer, newParent);
+      }
+      if (childLayer.name == 'text' || childLayer.name == 'container')
+        sketchLayerToMixed(childLayer, parent);
+    });
+  }
+
+  // Font color
+  if (layer.style && layer.style.textStyle) {
+    parent.append({prop: 'color', value: convRGBA(layer.style.textStyle.NSColor.color)});
+  }
+
+  // Borders
+  if (layer.style && layer.style.borders.length && _.find(layer.style.borders, ['isEnabled', 1])) {
+    parent.append(extractBorder(_.find(layer.style.borders, ['isEnabled', 1])));
+  }
+
+  // Radius
+  if (_.find(layer.layers, ['name', 'Path'])) {
+    let path = _.find(layer.layers, ['name', 'Path']);
+    if (path.fixedRadius)
+      parent.append({prop: 'border-radius', value: convUnit(path.fixedRadius)});
+  }
+};
+
 module.exports = plugin('postcss-backwards', (opts) => {
   opts = opts || {};
   return (css, result) => {
@@ -79,14 +168,15 @@ module.exports = plugin('postcss-backwards', (opts) => {
     // Runs through all of the nodes (declorations) in the file
     css.walkDecls(decl => {
       if (decl.value.indexOf('sketch(') !== -1) {
-        // console.log('DECL',decl);
         var parsedValue = valueParser(decl.value);
-        let file = parsedValue.nodes[0].nodes[0].value;
-        if (file == 'url') {
-          file = parsedValue.nodes[0].nodes[0].nodes[0].value;
-        }
 
+        let file = parsedValue.nodes[0].nodes[0].value;
+
+        // Resolve the file reference.
         let fileRef = path.join(path.dirname(decl.source.input.file), file);
+
+        // Retrieve the sketch JSON dump
+        let sketchData = getSketchJSON(path.resolve(fileRef));
 
         // Add a dependency.
         if (!addedDep) {
@@ -94,10 +184,39 @@ module.exports = plugin('postcss-backwards', (opts) => {
           addedDep = true;
         }
 
+        // Symbols
+        if (parsedValue.nodes[1].value.indexOf('.symbolDeep') == 0) {
+          let symbolName = parsedValue.nodes[1].value.substr(12);
+          let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
+          let symbol = _.find(symbols.layers, ['name', symbolName]);
+          //console.log(symbols);
+          if (!symbol) {
+            console.log('Missing symbol: ' + symbolName);
+          } else {
+            sketchLayerToMixed(symbol, decl.parent);
+            // Finally remove it...
+            decl.remove();
+          }
+        }
+
+        // Symbols
+        if (parsedValue.nodes[1].value.indexOf('.symbol') == 0) {
+          let symbolName = parsedValue.nodes[1].value.substr(8);
+          let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
+          let symbol = _.find(symbols.layers, ['name', symbolName]);
+          //console.log(symbols);
+          if (!symbol) {
+            console.log('Missing symbol: ' + symbolName);
+          } else {
+            sketchLayerToMixed(symbol, decl.parent, false);
+            // Finally remove it...
+            decl.remove();
+          }
+        }
+
+        // Shared Styles
         if (parsedValue.nodes[1].value.indexOf('.sharedStyle') == 0) {
           let sharedStyleName = parsedValue.nodes[1].value.substr(13);
-          let sketchData = getSketchJSON(path.resolve(fileRef));
-          // console.log('symbol time', sketchData.layerStyles);
           let style = _.find(sketchData.layerStyles.objects, ['name', sharedStyleName]);
           if (!style) {
             console.log('Missing shared style: ' + sharedStyleName);
@@ -178,11 +297,10 @@ module.exports = plugin('postcss-backwards', (opts) => {
             decl.remove();
           }
         }
+
+        // Text Styles...
         if (parsedValue.nodes[1].value.indexOf('.textStyle') == 0) {
           let textStyleName = parsedValue.nodes[1].value.substr(11);
-
-          let sketchData = getSketchJSON(path.resolve(fileRef));
-
           let style = _.find(sketchData.layerTextStyles.objects, ['name', textStyleName]);
           if (!style) {
             console.log('Missing text style: ' + textStyleName);
@@ -206,18 +324,7 @@ module.exports = plugin('postcss-backwards', (opts) => {
           }
 
         }
-
-
-        //console.log('File: ' + file);
-        //console.log('SketchJSON',style.value );
-        // console.log('Deep',parsedValue.nodes[0].nodes);
-        //console.log('this', decl );
       }
-      // css.walkRules(rule => {
-      //   console.log(rule);
-      // })
-      // console.log(decl);
-      //decl.value = decl.value.split('').reverse().join('');
     });
 
   };

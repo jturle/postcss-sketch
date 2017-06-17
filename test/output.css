@@ -1,29 +1,31 @@
+.symbolTest {
+    /*extends: sketch('./source_current.sketch').symbol.MenuComponent;*/
+}
+
 .container {
-    flex-grow: 1;
+    -webkit-box-flex: 1;
+        -ms-flex-positive: 1;
+            flex-grow: 1;
+    padding: 32px;
     padding: 2rem;
 }
 
 h1 {
-    font: 20px 'Helvetica Neue';
-    color: rgba(143,143,143,1.000000);
+    /*font: sketch('./source_current.sketch').textStyle.Heading_H1;*/
 }
 
 h2 {
-    font: 14px 'Helvetica Neue';
-    color: rgba(0,0,0,1.000000);
+    /*font: sketch('./source_current.sketch').textStyle.Heading_H2;*/
 }
 
 .headerBar {
-    opacity: 0.7497169384057971;
-    background-color: #4A90E2;
-    border: 1px solid #165AEE;
-    box-shadow: 1px 2px 2px 2px rgba(88,160,222,0.50);
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar;*/
 }
 
 .headerBar2 {
-    background-image: linear-gradient(90deg, #3023AE 0%, #53A0FD 48%, #B4EC51 100%);
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar2;*/
 }
 
 .headerBar3 {
-    background-image: radial-gradient(50% 64%, #3023AE 0%, #C86DD7 100%);
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;*/
 }

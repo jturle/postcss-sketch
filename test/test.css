@@ -1,24 +1,28 @@
+.symbolTest {
+    /*extends: sketch('./source_current.sketch').symbol.MenuComponent;*/
+}
+
 .container {
     flex-grow: 1;
     padding: 2rem;
 }
 
 h1 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H1;
+    /*font: sketch('./source_current.sketch').textStyle.Heading_H1;*/
 }
 
 h2 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H2;
+    /*font: sketch('./source_current.sketch').textStyle.Heading_H2;*/
 }
 
 .headerBar {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar;
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar;*/
 }
 
 .headerBar2 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar2;
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar2;*/
 }
 
 .headerBar3 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;
+    /*extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;*/
 }
