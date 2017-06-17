@@ -7,6 +7,7 @@ import fs from 'fs';
 import md5 from 'md5';
 
 let cache = [];
+const __DEBUG__ = true;
 
 const getSketchJSON = (file) => {
 
@@ -24,7 +25,10 @@ const getSketchJSON = (file) => {
   if (fs.existsSync(sketchToolLocation)) {
     if (fs.existsSync(file)) {
       let cmd = '"' + path.resolve(sketchToolLocation) + '" dump ' + path.resolve(file);
-      return cache[hash] = JSON.parse(execSync(cmd));
+      let execResult = execSync(cmd);
+      if (__DEBUG__)
+        fs.writeFileSync('./reference.json', execResult);
+      return cache[hash] = JSON.parse(execResult);
     } else {
       throw( 'Sketch File Not Found: ' + file );
     }
@@ -108,11 +112,19 @@ const extractBackground = (fill) => {
   return {prop: 'background', value: 'transparent'}
 };
 
-const extractBorder = (border) => {
-  return {
-    prop: 'border',
-    value: convUnit(_.get(border, 'thickness')) + ' solid ' + _.get(border, 'color.value')
-  };
+const processBorder = (border, parent) => {
+  parent.append({
+    prop: 'border-color',
+    value: border.color.value
+  });
+  parent.append({
+    prop: 'border-width',
+    value: convUnit(_.get(border, 'thickness'))
+  });
+  parent.append({
+    prop: 'border-style',
+    value: 'solid'
+  });
 };
 
 const sketchLayerToMixed = (layer, parent, nest = true) => {
@@ -127,7 +139,7 @@ const sketchLayerToMixed = (layer, parent, nest = true) => {
   }
   if (nest && layer.layers) {
     layer.layers.forEach((childLayer) => {
-      if (['text', 'container'].indexOf(childLayer.name) == -1) {
+      if (['text', 'container', 'Path'].indexOf(childLayer.name) == -1) {
         let newParent = parent.cloneBefore();
         newParent.removeAll();
         newParent.selector += ' :global(.' + childLayer.name + ')';
@@ -140,12 +152,51 @@ const sketchLayerToMixed = (layer, parent, nest = true) => {
 
   // Font color
   if (layer.style && layer.style.textStyle) {
+    console.log('textStyle', layer.style);
+    let alignment = layer.style.textStyle.NSParagraphStyle.style.alignment;
+    switch (alignment) {
+      case 1:
+        parent.append({prop: 'text-align', value: 'right'});
+        break;
+      case 2:
+        parent.append({prop: 'text-align', value: 'center'});
+        break;
+      case 3:
+        parent.append({prop: 'text-align', value: 'justify'});
+        break;
+      case 0:
+        parent.append({prop: 'text-align', value: 'left'});
+        break;
+    }
+    parent.append({
+      prop: 'line-height',
+      value: convUnit(layer.style.textStyle.NSParagraphStyle.style.maximumLineHeight)
+    });
+    let font = _.get(layer.style, 'textStyle.NSFont.family');
+    let fontName = layer.style.textStyle.NSFont.name.toLowerCase();
+    if (fontName.indexOf('italic'))
+      parent.append({
+        prop: 'font-style',
+        value: 'italic'
+      });
+    if (fontName.indexOf('bold'))
+      parent.append({
+        prop: 'font-weight',
+        value: 'bold'
+      });
+    if (font !== '.SF NS Text')
+      parent.append({prop: 'font-family', value: '\'' + _.get(layer.style, 'textStyle.NSFont.family') + '\''});
+    parent.append({
+      prop: 'font-size',
+      value: convUnit(_.get(layer.style, 'textStyle.NSFont.attributes.NSFontSizeAttribute'))
+    });
     parent.append({prop: 'color', value: convRGBA(layer.style.textStyle.NSColor.color)});
   }
 
   // Borders
   if (layer.style && layer.style.borders.length && _.find(layer.style.borders, ['isEnabled', 1])) {
-    parent.append(extractBorder(_.find(layer.style.borders, ['isEnabled', 1])));
+    processBorder(_.find(layer.style.borders, ['isEnabled', 1]), parent);
+    //parent.append(extractBorder(_.find(layer.style.borders, ['isEnabled', 1])));
   }
 
   // Radius
@@ -185,41 +236,42 @@ module.exports = plugin('postcss-backwards', (opts) => {
         }
 
         // Symbols
-        if (parsedValue.nodes[1].value.indexOf('.symbolDeep') == 0) {
-          let symbolName = parsedValue.nodes[1].value.substr(12);
+        if (parsedValue.nodes[1].value.indexOf('.symbol.deep') == 0) {
+          let symbolName = parsedValue.nodes[1].value.substr(13);
           let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
           let symbol = _.find(symbols.layers, ['name', symbolName]);
           //console.log(symbols);
           if (!symbol) {
-            console.log('Missing symbol: ' + symbolName);
+            decl.warn(result, 'Missing symbol: ' + symbolName);
           } else {
             sketchLayerToMixed(symbol, decl.parent);
             // Finally remove it...
             decl.remove();
           }
-        }
-
-        // Symbols
-        if (parsedValue.nodes[1].value.indexOf('.symbol') == 0) {
-          let symbolName = parsedValue.nodes[1].value.substr(8);
-          let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
-          let symbol = _.find(symbols.layers, ['name', symbolName]);
-          //console.log(symbols);
-          if (!symbol) {
-            console.log('Missing symbol: ' + symbolName);
-          } else {
-            sketchLayerToMixed(symbol, decl.parent, false);
-            // Finally remove it...
-            decl.remove();
+        } else {
+          // Symbols
+          if (parsedValue.nodes[1].value.indexOf('.symbol') == 0) {
+            let symbolName = parsedValue.nodes[1].value.substr(8);
+            let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
+            let symbol = _.find(symbols.layers, ['name', symbolName]);
+            //console.log(symbols);
+            if (!symbol) {
+              decl.warn(result, 'Missing symbol: ' + symbolName);
+            } else {
+              sketchLayerToMixed(symbol, decl.parent, false);
+              // Finally remove it...
+              decl.remove();
+            }
           }
         }
+
 
         // Shared Styles
         if (parsedValue.nodes[1].value.indexOf('.sharedStyle') == 0) {
           let sharedStyleName = parsedValue.nodes[1].value.substr(13);
           let style = _.find(sketchData.layerStyles.objects, ['name', sharedStyleName]);
           if (!style) {
-            console.log('Missing shared style: ' + sharedStyleName);
+            decl.warn(result, 'Missing shared style: ' + sharedStyleName);
           } else {
 
             // Do the font color...
@@ -303,7 +355,7 @@ module.exports = plugin('postcss-backwards', (opts) => {
           let textStyleName = parsedValue.nodes[1].value.substr(11);
           let style = _.find(sketchData.layerTextStyles.objects, ['name', textStyleName]);
           if (!style) {
-            console.log('Missing text style: ' + textStyleName);
+            decl.warn(result, 'Missing text style: ' + textStyleName);
           } else {
             // console.log('here', style.value.textStyle );
             if (_.get(style.value, 'textStyle.NSFont.family', false)) {

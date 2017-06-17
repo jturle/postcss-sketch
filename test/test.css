@@ -1,5 +1,5 @@
 .symbolTest {
-    /*extends: sketch('./source_current.sketch').symbol.MenuComponent;*/
+    extends: sketch('./source_current.sketch').symbol.deep.Card;
 }
 
 .container {

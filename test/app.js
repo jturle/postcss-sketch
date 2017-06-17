@@ -20,6 +20,10 @@ class App extends React.Component {
         <br/>
         <div className={styles.test}></div>
         <Menu/>
+        <br/>
+        <div className={styles.symbolTest}>
+          What's happening dude...
+        </div>
       </div>
     )
   }
