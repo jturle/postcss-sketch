@@ -45,7 +45,6 @@
     }
   },
   "dependencies": {
-    "fs": "^0.0.1-security",
     "lodash": "^4.17.4",
     "path": "^0.12.7",
     "postcss": "^6.0.1",
