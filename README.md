@@ -1,4 +1,4 @@
-# postcss-sketch
+# PostCSS-Sketch [![Build Status](https://travis-ci.org/jturle/postcss-sketch.svg?branch=master)](https://travis-ci.org/jturle/postcss-sketch)
 Just playing with pulling Sketch colours, styles etc directly into postcss references.
 
 Please ignore the horrible design in the examples etc.
@@ -65,16 +65,68 @@ h2 {
 
 ![Image of Sketch file](./doc/source_current.png)
 
+### Nested Symbol Support
+
+Little demo of working with a semantic-ui-react Menu component...
+
+## One line of CSS
+```css
+.menuContainer.ui.menu {
+    extends: sketch('../source_current.sketch').symbol.deep.MenuComponent;
+}
+```
+## Becomes (Output for CSS modules atm...)
+```css
+.menuContainer.ui.menu :global(.item:hover) {
+    background-image: linear-gradient(0deg, #0B7BD0 0%, #2DA1F8 100%);
+    border-radius: 3px;
+    text-align: left;
+    font-size: 14px;
+    color: rgba(255,255,255,1);
+}
+.menuContainer.ui.menu :global(.item.active) {
+    background-image: linear-gradient(0deg, #1991EB 0%, #2DA1F8 100%);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 14px;
+    color: rgba(255,255,255,1);
+}
+.menuContainer.ui.menu :global(.item.active:hover) {
+    background-image: linear-gradient(0deg, #1BBA43 0%, #1D9F2F 100%);
+    border-radius: 4px;
+    text-align: left;
+    font-size: 14px;
+    color: rgba(255,255,255,1);
+}
+.menuContainer.ui.menu :global(.item) {
+    text-align: left;
+    font-family: 'Chalkboard';
+    font-size: 14px;
+    color: rgba(53,64,82,1);
+}
+.menuContainer.ui.menu {
+    background-color: #FFFFFF;
+    text-align: left;
+    font-family: 'Arial';
+    font-size: 12px;
+    color: rgba(159,169,186,1);
+}
+```
+
 ## Try it?
 
-`npm install postcss-sketch` - good luck :/
+Clone the package, `yarn install`, `yarn dev`, visit http://localhost:8080. Open `source_current.sketch`. Have a play!
+
+## Use it?
+
+`yarn add postcss-sketch` - good luck :/
 
 Add the plugin to the postcss configuration.
 
 ```js
 module.exports = (ctx) => ({
   plugins: [
-    require("postcss-cssnext")(),
+    require("postcss-nesting")(),
     require("postcss-sketch")()
   ]
 });
