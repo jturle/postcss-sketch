@@ -3536,7 +3536,7 @@
           },
           "hasBackgroundColor" : 1,
           "layerListExpandedType" : 2,
-          "resizesContent" : 0,
+          "resizesContent" : 1,
           "backgroundColor" : {
             "<class>" : "MSColor",
             "value" : "#FAFAFA"
@@ -4040,15 +4040,15 @@
                   "objectID" : "8484FA42-D150-4CC8-852F-507D97F4E344",
                   "rotation" : 0,
                   "frame" : {
-                    "y" : 0,
+                    "y" : 4.294117647058822,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 30,
+                    "height" : 17,
                     "width" : 71,
                     "x" : 18
                   },
                   "glyphBounds" : {
-                    "y" : 10,
+                    "y" : 4,
                     "x" : 1,
                     "width" : 70,
                     "height" : 11
@@ -4094,9 +4094,9 @@
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
-                          "minimumLineHeight" : 30,
+                          "minimumLineHeight" : 0,
                           "lineSpacing" : 0,
-                          "maximumLineHeight" : 30,
+                          "maximumLineHeight" : 0,
                           "lineHeightMultiple" : 0,
                           "baseWritingDirection" : -1,
                           "defaultTabInterval" : 0
@@ -4174,7 +4174,7 @@
                   "heightIsClipped" : 0,
                   "lineSpacingBehaviour" : 2,
                   "dontSynchroniseWithSymbol" : 0,
-                  "textBehaviour" : 0,
+                  "textBehaviour" : 1,
                   "isFlippedVertical" : 0,
                   "<class>" : "MSTextLayer",
                   "resizingType" : 0,
@@ -4219,9 +4219,9 @@
                               "paragraphSpacingBefore" : 0,
                               "tailIndent" : 0,
                               "firstLineHeadIndent" : 0,
-                              "minimumLineHeight" : 30,
+                              "minimumLineHeight" : 0,
                               "lineSpacing" : 0,
-                              "maximumLineHeight" : 30,
+                              "maximumLineHeight" : 0,
                               "lineHeightMultiple" : 0,
                               "baseWritingDirection" : -1,
                               "defaultTabInterval" : 0
@@ -4659,15 +4659,15 @@
                   "objectID" : "BFCE653E-5E57-4A8C-8F26-09FD3C6FD7FF",
                   "rotation" : 0,
                   "frame" : {
-                    "y" : 0,
+                    "y" : 4.294117647058822,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 30,
+                    "height" : 17,
                     "width" : 71,
                     "x" : 18
                   },
                   "glyphBounds" : {
-                    "y" : 9,
+                    "y" : 3,
                     "x" : 1,
                     "width" : 69,
                     "height" : 12
@@ -4713,9 +4713,9 @@
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
-                          "minimumLineHeight" : 30,
+                          "minimumLineHeight" : 0,
                           "lineSpacing" : 0,
-                          "maximumLineHeight" : 30,
+                          "maximumLineHeight" : 0,
                           "lineHeightMultiple" : 0,
                           "baseWritingDirection" : -1,
                           "defaultTabInterval" : 0
@@ -4793,7 +4793,7 @@
                   "heightIsClipped" : 0,
                   "lineSpacingBehaviour" : 2,
                   "dontSynchroniseWithSymbol" : 0,
-                  "textBehaviour" : 0,
+                  "textBehaviour" : 1,
                   "isFlippedVertical" : 0,
                   "<class>" : "MSTextLayer",
                   "resizingType" : 0,
@@ -4838,9 +4838,9 @@
                               "paragraphSpacingBefore" : 0,
                               "tailIndent" : 0,
                               "firstLineHeadIndent" : 0,
-                              "minimumLineHeight" : 30,
+                              "minimumLineHeight" : 0,
                               "lineSpacing" : 0,
-                              "maximumLineHeight" : 30,
+                              "maximumLineHeight" : 0,
                               "lineHeightMultiple" : 0,
                               "baseWritingDirection" : -1,
                               "defaultTabInterval" : 0
@@ -5278,15 +5278,15 @@
                   "objectID" : "228FB48C-80E0-4389-99CA-9097109FC1DB",
                   "rotation" : 0,
                   "frame" : {
-                    "y" : 0,
+                    "y" : 3.583333333333334,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 30,
+                    "height" : 17,
                     "width" : 115,
                     "x" : 18
                   },
                   "glyphBounds" : {
-                    "y" : 9,
+                    "y" : 3,
                     "x" : 0,
                     "width" : 114,
                     "height" : 12
@@ -5332,9 +5332,9 @@
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
-                          "minimumLineHeight" : 30,
+                          "minimumLineHeight" : 0,
                           "lineSpacing" : 0,
-                          "maximumLineHeight" : 30,
+                          "maximumLineHeight" : 0,
                           "lineHeightMultiple" : 0,
                           "baseWritingDirection" : -1,
                           "defaultTabInterval" : 0
@@ -5412,7 +5412,7 @@
                   "heightIsClipped" : 0,
                   "lineSpacingBehaviour" : 2,
                   "dontSynchroniseWithSymbol" : 0,
-                  "textBehaviour" : 0,
+                  "textBehaviour" : 1,
                   "isFlippedVertical" : 0,
                   "<class>" : "MSTextLayer",
                   "resizingType" : 0,
@@ -5457,9 +5457,9 @@
                               "paragraphSpacingBefore" : 0,
                               "tailIndent" : 0,
                               "firstLineHeadIndent" : 0,
-                              "minimumLineHeight" : 30,
+                              "minimumLineHeight" : 0,
                               "lineSpacing" : 0,
-                              "maximumLineHeight" : 30,
+                              "maximumLineHeight" : 0,
                               "lineHeightMultiple" : 0,
                               "baseWritingDirection" : -1,
                               "defaultTabInterval" : 0
@@ -5583,18 +5583,18 @@
                   "objectID" : "62215053-5A41-45DF-8347-4DAF839DD2E0",
                   "rotation" : 0,
                   "frame" : {
-                    "y" : 0,
+                    "y" : 6,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 150,
+                    "height" : 90,
                     "width" : 68,
                     "x" : 0
                   },
                   "glyphBounds" : {
-                    "y" : 10,
+                    "y" : 4,
                     "x" : 0,
                     "width" : 68,
-                    "height" : 134
+                    "height" : 86
                   },
                   "layerListExpandedType" : 0,
                   "exportOptions" : {
@@ -5637,9 +5637,9 @@
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
-                          "minimumLineHeight" : 30,
+                          "minimumLineHeight" : 0,
                           "lineSpacing" : 0,
-                          "maximumLineHeight" : 30,
+                          "maximumLineHeight" : 0,
                           "lineHeightMultiple" : 0,
                           "baseWritingDirection" : -1,
                           "defaultTabInterval" : 0
@@ -5762,9 +5762,9 @@
                               "paragraphSpacingBefore" : 0,
                               "tailIndent" : 0,
                               "firstLineHeadIndent" : 0,
-                              "minimumLineHeight" : 30,
+                              "minimumLineHeight" : 0,
                               "lineSpacing" : 0,
-                              "maximumLineHeight" : 30,
+                              "maximumLineHeight" : 0,
                               "lineHeightMultiple" : 0,
                               "baseWritingDirection" : -1,
                               "defaultTabInterval" : 0
@@ -5802,10 +5802,10 @@
                 ]
               },
               "frame" : {
-                "y" : 52,
+                "y" : 69,
                 "<class>" : "MSRect",
                 "constrainProportions" : 0,
-                "height" : 150,
+                "height" : 90,
                 "width" : 68,
                 "x" : 18
               },
@@ -6057,8 +6057,8 @@
             "y" : 0,
             "<class>" : "MSRect",
             "constrainProportions" : 0,
-            "height" : 63,
-            "width" : 146,
+            "height" : 224,
+            "width" : 384,
             "x" : 1028
           },
           "hasClickThrough" : 1,
@@ -6074,12 +6074,12 @@
 
             ]
           },
-          "hasBackgroundColor" : 0,
+          "hasBackgroundColor" : 1,
           "layerListExpandedType" : 0,
           "resizesContent" : 1,
           "backgroundColor" : {
             "<class>" : "MSColor",
-            "value" : "#FFFFFF"
+            "value" : "#C14040"
           },
           "rotation" : 0,
           "style" : {
@@ -6127,7 +6127,56 @@
               "saturation" : 1
             },
             "fills" : [
-
+              {
+                "contextSettings" : {
+                  "<class>" : "MSGraphicsContextSettings",
+                  "opacity" : 1,
+                  "blendMode" : 0
+                },
+                "color" : {
+                  "<class>" : "MSColor",
+                  "value" : "#FFFFFF"
+                },
+                "<class>" : "MSStyleFill",
+                "gradient" : {
+                  "from" : {
+                    "x" : 0.5,
+                    "y" : 0
+                  },
+                  "shouldSmoothenOpacity" : 0,
+                  "gradientType" : 0,
+                  "<class>" : "MSGradient",
+                  "stops" : [
+                    {
+                      "<class>" : "MSGradientStop",
+                      "color" : {
+                        "<class>" : "MSColor",
+                        "value" : "#FFFFFF"
+                      },
+                      "position" : 0
+                    },
+                    {
+                      "<class>" : "MSGradientStop",
+                      "color" : {
+                        "<class>" : "MSColor",
+                        "value" : "#000000"
+                      },
+                      "position" : 1
+                    }
+                  ],
+                  "to" : {
+                    "x" : 0.5,
+                    "y" : 1
+                  },
+                  "elipseLength" : 0
+                },
+                "fillType" : 0,
+                "noiseIntensity" : 0,
+                "patternFillType" : 1,
+                "patternTileScale" : 1,
+                "noiseIndex" : 0,
+                "isEnabled" : 1
+              }
             ],
             "borders" : [
 
@@ -6303,17 +6352,33 @@
 
                 ],
                 "shadows" : [
-
+                  {
+                    "spread" : 0,
+                    "color" : {
+                      "<class>" : "MSColor",
+                      "value" : "rgba(0,0,0,0.50)"
+                    },
+                    "offsetY" : 2,
+                    "offsetX" : 0,
+                    "<class>" : "MSStyleShadow",
+                    "blurRadius" : 4,
+                    "contextSettings" : {
+                      "<class>" : "MSGraphicsContextSettings",
+                      "opacity" : 1,
+                      "blendMode" : 0
+                    },
+                    "isEnabled" : 1
+                  }
                 ]
               },
               "rotation" : 0,
               "frame" : {
-                "y" : 0,
+                "y" : 13.89453125,
                 "<class>" : "MSRect",
                 "constrainProportions" : 0,
-                "height" : 63,
-                "width" : 146,
-                "x" : 0
+                "height" : 192.29296875,
+                "width" : 346.55078125,
+                "x" : 20.1171875
               },
               "hasClickThrough" : 0,
               "objectID" : "788146F6-0E72-4225-A965-A986B2B0791B",
@@ -6342,8 +6407,8 @@
                     "y" : 0,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 63,
-                    "width" : 146,
+                    "height" : 192.2929687499991,
+                    "width" : 346.5507812500008,
                     "x" : 0
                   },
                   "layerListExpandedType" : 0,
@@ -6463,25 +6528,25 @@
               "name" : "container",
               "isLocked" : 0,
               "shouldBreakMaskChain" : 0,
-              "resizingConstraint" : 63
+              "resizingConstraint" : 61
             },
             {
               "isFlippedHorizontal" : 0,
               "objectID" : "FD445CBF-8F43-4470-B3DD-7D55DFEC1E59",
               "rotation" : 0,
               "frame" : {
-                "y" : 2,
+                "y" : 47,
                 "<class>" : "MSRect",
                 "constrainProportions" : 0,
-                "height" : 60,
-                "width" : 80.65622070312497,
-                "x" : 33
+                "height" : 40,
+                "width" : 169.8115234375,
+                "x" : 53
               },
               "glyphBounds" : {
                 "y" : 4,
                 "x" : 0,
-                "width" : 81,
-                "height" : 52
+                "width" : 104,
+                "height" : 34
               },
               "layerListExpandedType" : 0,
               "exportOptions" : {
@@ -6520,7 +6585,7 @@
                       "headIndent" : 0,
                       "lineBreakMode" : 0,
                       "hyphenationFactor" : 0,
-                      "alignment" : 3,
+                      "alignment" : 0,
                       "paragraphSpacingBefore" : 0,
                       "tailIndent" : 0,
                       "firstLineHeadIndent" : 0,
@@ -6645,7 +6710,7 @@
                           "headIndent" : 0,
                           "lineBreakMode" : 0,
                           "hyphenationFactor" : 0,
-                          "alignment" : 3,
+                          "alignment" : 0,
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
@@ -6673,7 +6738,7 @@
                 }
               },
               "shouldBreakMaskChain" : 0,
-              "resizingConstraint" : 63,
+              "resizingConstraint" : 18,
               "automaticallyDrawOnUnderlyingPath" : 0
             }
           ],

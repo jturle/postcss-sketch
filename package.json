@@ -11,6 +11,7 @@
     "build": "babel -d lib/ src/",
     "build:watch": "babel -w -d lib/ src/",
     "test": "postcss test/test.css",
+    "test:menu": "postcss test/components/menu.css",
     "test:watch": "postcss test/test.css -o ./test/output.css -w",
     "dev": "webpack-dev-server --hot --watch"
   },
