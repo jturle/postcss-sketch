@@ -1,4 +1,4 @@
-import {convUnit} from '../helpers';
+import { convUnit } from '../helpers';
 
 export default (border, parent) => {
     parent.append({
@@ -14,4 +14,3 @@ export default (border, parent) => {
         value: 'solid'
     });
 };
-

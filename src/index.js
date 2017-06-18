@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import postcss, { plugin } from 'postcss';
 import valueParser from 'postcss-value-parser';
 import _ from 'lodash';
@@ -5,11 +6,18 @@ import path from 'path';
 
 // Local imports...
 import { convRGBA, convUnit, percentUnit } from './helpers';
-import { getSketchJSON, clearLoaderCache } from './loader';
+import {
+    getSketchJSON,
+    clearLoaderCache,
+    disableCache,
+    enableDebugMode
+} from './loader';
 import * as parser from './parsers';
 
 module.exports = plugin('postcss-sketch', opts => {
     opts = opts || {};
+    if (_.get(opts, 'debugMode', false)) enableDebugMode();
+    if (_.get(opts, 'noCache', false)) disableCache();
     return (css, result) => {
         clearLoaderCache();
 
@@ -18,7 +26,7 @@ module.exports = plugin('postcss-sketch', opts => {
         // Runs through all of the nodes (declorations) in the file
         css.walkDecls(decl => {
             if (decl.value.indexOf('sketch(') !== -1) {
-                var parsedValue = valueParser(decl.value);
+                let parsedValue = valueParser(decl.value);
 
                 let file = parsedValue.nodes[0].nodes[0].value;
 
@@ -29,7 +37,7 @@ module.exports = plugin('postcss-sketch', opts => {
                         path.dirname(decl.source.input.file),
                         file
                     ); // Relative to CSS File
-                else fileRef = path.join(file); // No CSS file, probably testing...
+                else fileRef = path.join(file); // No CSS file, probably testing
 
                 // Retrieve the sketch JSON dump
                 let sketchData = getSketchJSON(path.resolve(fileRef));
@@ -45,21 +53,28 @@ module.exports = plugin('postcss-sketch', opts => {
                 }
 
                 // Symbols
-                if (parsedValue.nodes[1].value.indexOf('.symbol.deep') == 0) {
-                    let symbolName = parsedValue.nodes[1].value.substr(13);
-                    let symbols = _.find(sketchData.pages, ['name', 'Symbols']);
-                    let symbol = _.find(symbols.layers, ['name', symbolName]);
-                    //console.log(symbols);
-                    if (!symbol) {
-                        decl.warn(result, 'Missing symbol: ' + symbolName);
+                if (parsedValue.nodes[1].value.indexOf('.symbol') === 0) {
+                    if (
+                        parsedValue.nodes[1].value.indexOf('.symbol.deep') === 0
+                    ) {
+                        let symbolName = parsedValue.nodes[1].value.substr(13);
+                        let symbols = _.find(sketchData.pages, [
+                            'name',
+                            'Symbols'
+                        ]);
+                        let symbol = _.find(symbols.layers, [
+                            'name',
+                            symbolName
+                        ]);
+                        if (!symbol) {
+                            decl.warn(result, 'Missing symbol: ' + symbolName);
+                        } else {
+                            parser.processLayer(symbol, decl.parent);
+                            // Finally remove it...
+                            decl.remove();
+                        }
                     } else {
-                        parser.processLayer(symbol, decl.parent);
-                        // Finally remove it...
-                        decl.remove();
-                    }
-                } else {
-                    // Symbols
-                    if (parsedValue.nodes[1].value.indexOf('.symbol') == 0) {
+                        // Symbols
                         let symbolName = parsedValue.nodes[1].value.substr(8);
                         let symbols = _.find(sketchData.pages, [
                             'name',
@@ -69,7 +84,6 @@ module.exports = plugin('postcss-sketch', opts => {
                             'name',
                             symbolName
                         ]);
-                        //console.log(symbols);
                         if (!symbol) {
                             decl.warn(result, 'Missing symbol: ' + symbolName);
                         } else {
@@ -81,7 +95,7 @@ module.exports = plugin('postcss-sketch', opts => {
                 }
 
                 // Shared Styles
-                if (parsedValue.nodes[1].value.indexOf('.sharedStyle') == 0) {
+                if (parsedValue.nodes[1].value.indexOf('.sharedStyle') === 0) {
                     let sharedStyleName = parsedValue.nodes[1].value.substr(13);
                     let style = _.find(sketchData.layerStyles.objects, [
                         'name',
@@ -111,7 +125,7 @@ module.exports = plugin('postcss-sketch', opts => {
                         // Do the background...
                         let fill = _.find(style.value.fills, ['isEnabled', 1]);
                         if (fill) {
-                            if (fill.fillType == 0) {
+                            if (fill.fillType === 0) {
                                 // Background-color
                                 decl.cloneBefore({
                                     prop: 'background-color',
@@ -119,17 +133,16 @@ module.exports = plugin('postcss-sketch', opts => {
                                 });
                             }
 
-                            if (fill.fillType == 1) {
+                            if (fill.fillType === 1) {
                                 // Gradient
                                 let gradRule;
+                                /* eslint-disable */
                                 switch (fill.gradient.gradientType) {
+                                    default:
                                     case 0:
                                         gradRule = 'linear-gradient(90deg, ';
                                         break;
                                     case 1:
-                                        // console.log('Radial', fill );
-                                        /* Rectangle:
-                                         background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
                                         gradRule =
                                             'radial-gradient(' +
                                             percentUnit(fill.gradient.from.x) +
@@ -138,9 +151,8 @@ module.exports = plugin('postcss-sketch', opts => {
                                             ', ';
                                         break;
                                 }
+                                /* eslint-enable */
                                 fill.gradient.stops.forEach((stop, idx) => {
-                                    // if( fill.gradient.gradientType == 1 )
-                                    //console.log(stop);
                                     if (idx > 0) gradRule += ', ';
                                     gradRule +=
                                         stop.color.value +
@@ -194,7 +206,7 @@ module.exports = plugin('postcss-sketch', opts => {
                 }
 
                 // Text Styles...
-                if (parsedValue.nodes[1].value.indexOf('.textStyle') == 0) {
+                if (parsedValue.nodes[1].value.indexOf('.textStyle') === 0) {
                     let textStyleName = parsedValue.nodes[1].value.substr(11);
                     let style = _.find(sketchData.layerTextStyles.objects, [
                         'name',
@@ -206,39 +218,43 @@ module.exports = plugin('postcss-sketch', opts => {
                             'Missing text style: ' + textStyleName
                         );
                     } else {
-                        // console.log('here', style.value.textStyle );
-                        if (
-                            _.get(style.value, 'textStyle.NSFont.family', false)
-                        ) {
-                            // Do the font family & size...
-                            decl.value =
+                        // Do the font family & size...
+                        let fontName = _.get(
+                            style.value.textStyle,
+                            'NSFont.family'
+                        );
+                        /* eslint-disable */
+                        decl.parent.append({
+                            prop: 'font-family',
+                            value: "'" + fontName + "'"
+                        });
+                        /* eslint-enable */
+                        decl.parent.append({
+                            prop: 'font-size',
+                            value: convUnit(
                                 _.get(
-                                    style.value,
-                                    'textStyle.NSFont.attributes.NSFontSizeAttribute',
-                                    10
-                                ) +
-                                "px '" +
-                                _.get(
-                                    style.value,
-                                    'textStyle.NSFont.family',
-                                    false
-                                ) +
-                                "'";
+                                    style.value.textStyle,
+                                    'NSFont.attributes.NSFontSizeAttribute'
+                                )
+                            )
+                        });
 
-                            // Do the font color...
-                            if (_.has(style.value, 'textStyle.NSColor.color')) {
-                                const color = postcss.decl({
-                                    prop: 'color',
-                                    value: convRGBA(
-                                        _.get(
-                                            style.value,
-                                            'textStyle.NSColor.color'
-                                        )
+                        // Do the font color...
+                        if (_.has(style.value, 'textStyle.NSColor.color')) {
+                            const color = postcss.decl({
+                                prop: 'color',
+                                value: convRGBA(
+                                    _.get(
+                                        style.value,
+                                        'textStyle.NSColor.color'
                                     )
-                                });
-                                decl.parent.append(color);
-                            }
+                                )
+                            });
+                            decl.parent.append(color);
                         }
+
+                        // Remove original
+                        decl.remove();
                     }
                 }
             }

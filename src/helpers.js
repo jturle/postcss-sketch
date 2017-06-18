@@ -3,7 +3,7 @@
  * @param string
  * @returns {string}
  */
-export const convRGBA = (string) => {
+export const convRGBA = string => {
     let x = string.substr(5, string.indexOf(')') - 5).split(',');
     x[0] *= 255;
     x[0] = Math.round(x[0]);
@@ -22,7 +22,7 @@ export const convRGBA = (string) => {
  * @param unit
  * @returns {string}
  */
-export const convUnit = (unit) => {
+export const convUnit = unit => {
     return Math.round(unit * 100) / 100 + 'px';
 };
 
@@ -32,6 +32,6 @@ export const convUnit = (unit) => {
  * @param unit
  * @returns {string}
  */
-export const percentUnit = (unit) => {
+export const percentUnit = unit => {
     return Math.round(unit * 100) + '%';
 };

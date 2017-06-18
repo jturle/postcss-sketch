@@ -1,9 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 import md5 from 'md5';
-import {execSync} from 'child_process';
+import { execSync } from 'child_process';
 
-const __DEBUG__ = false;
+let __DEBUG__ = false;
+let __CACHEENABLED__ = true;
+
 let cache = [];
 
 export const clearLoaderCache = () => {
@@ -11,32 +13,52 @@ export const clearLoaderCache = () => {
     cache = [];
 };
 
-export const getSketchJSON = (file) => {
+export const disableCache = () => {
+    __CACHEENABLED__ = false;
+};
+
+export const enableDebugMode = () => {
+    __DEBUG__ = true;
+};
+
+export const getSketchJSON = file => {
     // Quick Cache...
     let hash = md5(file);
-    if (cache[hash])
-        return cache[hash];
+    if (__CACHEENABLED__ && cache[hash]) return cache[hash];
 
-    if (file.indexOf('.json') !== -1)
-        return cache[hash] = JSON.parse(fs.readFileSync(file));
+    if (file.indexOf('.json') !== -1) {
+        let json = JSON.parse(fs.readFileSync(file));
+        if (__CACHEENABLED__) cache[hash] = json;
+        return json;
+    }
 
-    let sketchToolLocation = '/Applications/Sketch Beta.app/Contents/Resources/sketchtool/bin/sketchtool';
+    let sketchToolLocation =
+        '/Applications/Sketch Beta.app/' +
+        'Contents/Resources/sketchtool/bin/sketchtool';
 
     // Suppor the non-beta version.
     if (!fs.existsSync(sketchToolLocation))
-        sketchToolLocation = '/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool';
+        sketchToolLocation =
+            '/Applications/Sketch.app/' +
+            'Contents/Resources/sketchtool/bin/sketchtool';
 
     if (fs.existsSync(sketchToolLocation)) {
         if (fs.existsSync(file)) {
-            let cmd = '"' + path.resolve(sketchToolLocation) + '" dump ' + path.resolve(file);
+            let cmd =
+                '"' +
+                path.resolve(sketchToolLocation) +
+                '" dump ' +
+                path.resolve(file);
             let execResult = execSync(cmd);
             if (__DEBUG__)
-                fs.writeFileSync('./reference.json', execResult);
-            return cache[hash] = JSON.parse(execResult);
+                fs.writeFileSync(file + '.reference.json', execResult);
+            let json = JSON.parse(execResult);
+            if (__CACHEENABLED__) cache[hash] = json;
+            return json;
         } else {
-            throw( 'Sketch File Not Found: ' + file );
+            throw Error('Sketch File Not Found: ' + file);
         }
     } else {
-        throw( 'Sketch Tool Not Found: ' + sketchToolLocation);
+        throw Error('Sketch Tool Not Found: ' + sketchToolLocation);
     }
 };
