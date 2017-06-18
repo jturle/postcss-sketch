@@ -1,31 +1,18 @@
-'use strict';
+import _ from 'lodash';
+import { percentUnit } from '../helpers';
 
-Object.defineProperty(exports, '__esModule', {
-    value: true
-});
-
-var _lodash = require('lodash');
-
-var _lodash2 = _interopRequireDefault(_lodash);
-
-var _helpers = require('../helpers');
-
-function _interopRequireDefault(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
-
-exports.default = function(fill) {
-    if (fill.fillType == 0) {
+export default fill => {
+    if (fill.fillType === 0) {
         // Background-color
         return {
             prop: 'background-color',
-            value: _lodash2.default.get(fill, 'color.value')
+            value: _.get(fill, 'color.value')
         };
     }
 
-    if (fill.fillType == 1) {
+    if (fill.fillType === 1) {
         // Gradient
-        var gradRule = void 0;
+        let gradRule;
         switch (fill.gradient.gradientType) {
             case 0:
                 gradRule = 'linear-gradient(0deg, ';
@@ -36,13 +23,13 @@ exports.default = function(fill) {
                  background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
                 gradRule =
                     'radial-gradient(' +
-                    (0, _helpers.percentUnit)(fill.gradient.from.x) +
+                    percentUnit(fill.gradient.from.x) +
                     ' ' +
-                    (0, _helpers.percentUnit)(fill.gradient.to.y) +
+                    percentUnit(fill.gradient.to.y) +
                     ', ';
                 break;
         }
-        fill.gradient.stops.forEach(function(stop, idx) {
+        fill.gradient.stops.forEach((stop, idx) => {
             // if( fill.gradient.gradientType == 1 )
             //console.log(stop);
             if (idx > 0) gradRule += ', ';
@@ -55,6 +42,4 @@ exports.default = function(fill) {
             value: gradRule
         };
     }
-
-    return { prop: 'background', value: 'transparent' };
 };

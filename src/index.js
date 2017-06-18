@@ -51,7 +51,6 @@ module.exports = plugin('postcss-sketch', opts => {
                     });
                     addedDep = true;
                 }
-
                 // Symbols
                 if (parsedValue.nodes[1].value.indexOf('.symbol') === 0) {
                     if (
@@ -67,7 +66,10 @@ module.exports = plugin('postcss-sketch', opts => {
                             symbolName
                         ]);
                         if (!symbol) {
-                            decl.warn(result, 'Missing symbol: ' + symbolName);
+                            decl.warn(
+                                result,
+                                'Missing symbol deep: ' + symbolName
+                            );
                         } else {
                             parser.processLayer(symbol, decl.parent);
                             // Finally remove it...

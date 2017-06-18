@@ -50,8 +50,7 @@ export const getSketchJSON = file => {
                 '" dump ' +
                 path.resolve(file);
             let execResult = execSync(cmd);
-            if (__DEBUG__)
-                fs.writeFileSync(file + '.reference.json', execResult);
+            if (__DEBUG__) fs.writeFileSync(file + '.ref.json', execResult);
             let json = JSON.parse(execResult);
             if (__CACHEENABLED__) cache[hash] = json;
             return json;

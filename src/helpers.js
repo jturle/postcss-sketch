@@ -35,3 +35,10 @@ export const convUnit = unit => {
 export const percentUnit = unit => {
     return Math.round(unit * 100) + '%';
 };
+
+export const appendRules = (decl, rules) => {
+    if (rules) {
+        if (Array.isArray(rules)) rules.forEach(rule => decl.append(rule));
+        else decl.append(rules);
+    }
+};

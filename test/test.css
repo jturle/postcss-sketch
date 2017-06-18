@@ -2,9 +2,25 @@
     extends: sketch('./source_current.sketch').symbol.deep.Card;
 }
 
+.basicSymbolTest {
+    extends: sketch('./tests.sketch').symbol.BasicSymbol;
+}
+
+.testBackground {
+    extends: sketch('./tests.sketch').symbol.TestBackground;
+}
+
+.testLinearBackground {
+    extends: sketch('./tests.sketch').symbol.TestLinearBackground;
+}
+
+.testRadialBackground {
+    extends: sketch('./tests.sketch').symbol.TestRadialBackground;
+}
+
+/*
 .container {
     flex-grow: 1;
-    /*padding: 2rem;*/
 }
 
 h1 {
@@ -26,3 +42,5 @@ h2 {
 .headerBar3 {
     extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;
 }
+
+ */
