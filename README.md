@@ -67,7 +67,7 @@ h2 {
 
 ## Try it?
 
-`npm install jturle/postcss-sketch` - good luck :/
+`npm install postcss-sketch` - good luck :/
 
 Add the plugin to the postcss configuration.
 
