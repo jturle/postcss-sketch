@@ -2850,8 +2850,8 @@
             "y" : 542,
             "<class>" : "MSRect",
             "constrainProportions" : 0,
-            "height" : 63,
-            "width" : 117,
+            "height" : 258,
+            "width" : 400.34375,
             "x" : 603
           },
           "layerListExpandedType" : 0,
@@ -2923,7 +2923,7 @@
 
             ]
           },
-          "masterInfluenceEdgeMaxYPadding" : 0,
+          "masterInfluenceEdgeMaxYPadding" : 10,
           "symbolID" : "205B1718-AE85-4D46-919C-A096E9F20F41",
           "isFlippedVertical" : 0,
           "resizingType" : 0,
@@ -2934,10 +2934,10 @@
           "horizontalSpacing" : 0,
           "isLocked" : 0,
           "shouldBreakMaskChain" : 0,
-          "masterInfluenceEdgeMinYPadding" : 0,
+          "masterInfluenceEdgeMinYPadding" : 1,
           "resizingConstraint" : 63,
-          "masterInfluenceEdgeMinXPadding" : 0,
-          "masterInfluenceEdgeMaxXPadding" : 0
+          "masterInfluenceEdgeMinXPadding" : 1,
+          "masterInfluenceEdgeMaxXPadding" : 8
         }
       ],
       "isVisible" : 1,
@@ -3534,12 +3534,12 @@
 
             ]
           },
-          "hasBackgroundColor" : 1,
+          "hasBackgroundColor" : 0,
           "layerListExpandedType" : 2,
           "resizesContent" : 1,
           "backgroundColor" : {
             "<class>" : "MSColor",
-            "value" : "#FAFAFA"
+            "value" : "#E68686"
           },
           "rotation" : 0,
           "style" : {
@@ -3944,7 +3944,7 @@
                               "y" : 0
                             },
                             "<class>" : "MSCurvePoint",
-                            "cornerRadius" : 59,
+                            "cornerRadius" : 3,
                             "curveTo" : {
                               "x" : 0,
                               "y" : 0
@@ -3963,7 +3963,7 @@
                               "y" : 0
                             },
                             "<class>" : "MSCurvePoint",
-                            "cornerRadius" : 59,
+                            "cornerRadius" : 3,
                             "curveTo" : {
                               "x" : 1,
                               "y" : 0
@@ -3982,7 +3982,7 @@
                               "y" : 1
                             },
                             "<class>" : "MSCurvePoint",
-                            "cornerRadius" : 59,
+                            "cornerRadius" : 3,
                             "curveTo" : {
                               "x" : 1,
                               "y" : 1
@@ -4001,7 +4001,7 @@
                               "y" : 1
                             },
                             "<class>" : "MSCurvePoint",
-                            "cornerRadius" : 59,
+                            "cornerRadius" : 3,
                             "curveTo" : {
                               "x" : 0,
                               "y" : 1
@@ -4021,7 +4021,7 @@
                       "name" : "Path",
                       "isLocked" : 0,
                       "shouldBreakMaskChain" : 0,
-                      "fixedRadius" : 59,
+                      "fixedRadius" : 3,
                       "booleanOperation" : -1,
                       "resizingConstraint" : 63
                     }
@@ -4275,7 +4275,7 @@
               "resizingType" : 0,
               "<class>" : "MSLayerGroup",
               "isLocked" : 0,
-              "layerListExpandedType" : 2,
+              "layerListExpandedType" : 1,
               "nameIsFixed" : 1,
               "name" : "item:hover"
             },
@@ -4894,7 +4894,7 @@
               "resizingType" : 0,
               "<class>" : "MSLayerGroup",
               "isLocked" : 0,
-              "layerListExpandedType" : 2,
+              "layerListExpandedType" : 1,
               "nameIsFixed" : 1,
               "name" : "item.active"
             },
@@ -6074,8 +6074,8 @@
 
             ]
           },
-          "hasBackgroundColor" : 1,
-          "layerListExpandedType" : 0,
+          "hasBackgroundColor" : 0,
+          "layerListExpandedType" : 2,
           "resizesContent" : 1,
           "backgroundColor" : {
             "<class>" : "MSColor",
@@ -6303,7 +6303,7 @@
                     "position" : 1,
                     "color" : {
                       "<class>" : "MSColor",
-                      "value" : "#979797"
+                      "value" : "#FF0000"
                     },
                     "<class>" : "MSStyleBorder",
                     "gradient" : {
@@ -6345,7 +6345,7 @@
                       "opacity" : 1,
                       "blendMode" : 0
                     },
-                    "isEnabled" : 1
+                    "isEnabled" : 0
                   }
                 ],
                 "innerShadows" : [
@@ -6358,8 +6358,8 @@
                       "<class>" : "MSColor",
                       "value" : "rgba(0,0,0,0.50)"
                     },
-                    "offsetY" : 2,
-                    "offsetX" : 0,
+                    "offsetY" : 6,
+                    "offsetX" : 4,
                     "<class>" : "MSStyleShadow",
                     "blurRadius" : 4,
                     "contextSettings" : {
@@ -6373,12 +6373,12 @@
               },
               "rotation" : 0,
               "frame" : {
-                "y" : 13.89453125,
+                "y" : 0,
                 "<class>" : "MSRect",
                 "constrainProportions" : 0,
-                "height" : 192.29296875,
-                "width" : 346.55078125,
-                "x" : 20.1171875
+                "height" : 224,
+                "width" : 384,
+                "x" : 0
               },
               "hasClickThrough" : 0,
               "objectID" : "788146F6-0E72-4225-A965-A986B2B0791B",
@@ -6407,8 +6407,8 @@
                     "y" : 0,
                     "<class>" : "MSRect",
                     "constrainProportions" : 0,
-                    "height" : 192.2929687499991,
-                    "width" : 346.5507812500008,
+                    "height" : 223.9999999999989,
+                    "width" : 384.0000000000007,
                     "x" : 0
                   },
                   "layerListExpandedType" : 0,
@@ -6439,7 +6439,7 @@
                           "y" : 0
                         },
                         "<class>" : "MSCurvePoint",
-                        "cornerRadius" : 8,
+                        "cornerRadius" : 38,
                         "curveTo" : {
                           "x" : 0,
                           "y" : 0
@@ -6458,7 +6458,7 @@
                           "y" : 0
                         },
                         "<class>" : "MSCurvePoint",
-                        "cornerRadius" : 8,
+                        "cornerRadius" : 38,
                         "curveTo" : {
                           "x" : 1,
                           "y" : 0
@@ -6477,7 +6477,7 @@
                           "y" : 1
                         },
                         "<class>" : "MSCurvePoint",
-                        "cornerRadius" : 8,
+                        "cornerRadius" : 38,
                         "curveTo" : {
                           "x" : 1,
                           "y" : 1
@@ -6496,7 +6496,7 @@
                           "y" : 1
                         },
                         "<class>" : "MSCurvePoint",
-                        "cornerRadius" : 8,
+                        "cornerRadius" : 38,
                         "curveTo" : {
                           "x" : 0,
                           "y" : 1
@@ -6516,7 +6516,7 @@
                   "name" : "Path",
                   "isLocked" : 0,
                   "shouldBreakMaskChain" : 0,
-                  "fixedRadius" : 8,
+                  "fixedRadius" : 38,
                   "booleanOperation" : -1,
                   "resizingConstraint" : 63
                 }
@@ -6528,25 +6528,25 @@
               "name" : "container",
               "isLocked" : 0,
               "shouldBreakMaskChain" : 0,
-              "resizingConstraint" : 61
+              "resizingConstraint" : 47
             },
             {
               "isFlippedHorizontal" : 0,
               "objectID" : "FD445CBF-8F43-4470-B3DD-7D55DFEC1E59",
               "rotation" : 0,
               "frame" : {
-                "y" : 47,
+                "y" : 10,
                 "<class>" : "MSRect",
                 "constrainProportions" : 0,
-                "height" : 40,
+                "height" : 36,
                 "width" : 169.8115234375,
-                "x" : 53
+                "x" : 14
               },
               "glyphBounds" : {
                 "y" : 4,
                 "x" : 0,
-                "width" : 104,
-                "height" : 34
+                "width" : 96,
+                "height" : 32
               },
               "layerListExpandedType" : 0,
               "exportOptions" : {
@@ -6564,7 +6564,7 @@
                 "startDecorationType" : 0,
                 "textStyle" : {
                   "NSParagraphStyle" : {
-                    "<class>" : "NSMutableParagraphStyle",
+                    "<class>" : "NSParagraphStyle",
                     "style" : {
                       "headerLevel" : 0,
                       "paragraphSpacing" : 0,
@@ -6589,9 +6589,9 @@
                       "paragraphSpacingBefore" : 0,
                       "tailIndent" : 0,
                       "firstLineHeadIndent" : 0,
-                      "minimumLineHeight" : 20,
+                      "minimumLineHeight" : 0,
                       "lineSpacing" : 0,
-                      "maximumLineHeight" : 20,
+                      "maximumLineHeight" : 0,
                       "lineHeightMultiple" : 0,
                       "baseWritingDirection" : -1,
                       "defaultTabInterval" : 0
@@ -6599,16 +6599,16 @@
                   },
                   "<class>" : "MSTextStyle",
                   "NSFont" : {
-                    "name" : "Arial Bold Italic",
+                    "name" : "Chalkboard",
                     "attributes" : {
                       "NSFontSizeAttribute" : 14,
-                      "NSFontNameAttribute" : "Arial-BoldItalicMT"
+                      "NSFontNameAttribute" : "Chalkboard"
                     },
-                    "family" : "Arial"
+                    "family" : "Chalkboard"
                   },
                   "NSColor" : {
                     "<class>" : "NSColor",
-                    "color" : "rgba(0.468484,0.468484,0.468484,1.000000)"
+                    "color" : "rgba(0.000000,0.000000,0.000000,1.000000)"
                   }
                 },
                 "borderOptions" : {
@@ -6686,10 +6686,10 @@
                     {
                       "NSColor" : {
                         "<class>" : "NSColor",
-                        "color" : "rgba(0.468484,0.468484,0.468484,1.000000)"
+                        "color" : "rgba(0.000000,0.000000,0.000000,1.000000)"
                       },
                       "NSParagraphStyle" : {
-                        "<class>" : "NSMutableParagraphStyle",
+                        "<class>" : "NSParagraphStyle",
                         "style" : {
                           "headerLevel" : 0,
                           "paragraphSpacing" : 0,
@@ -6714,9 +6714,9 @@
                           "paragraphSpacingBefore" : 0,
                           "tailIndent" : 0,
                           "firstLineHeadIndent" : 0,
-                          "minimumLineHeight" : 20,
+                          "minimumLineHeight" : 0,
                           "lineSpacing" : 0,
-                          "maximumLineHeight" : 20,
+                          "maximumLineHeight" : 0,
                           "lineHeightMultiple" : 0,
                           "baseWritingDirection" : -1,
                           "defaultTabInterval" : 0
@@ -6724,12 +6724,12 @@
                       },
                       "length" : 23,
                       "NSFont" : {
-                        "name" : "Arial Bold Italic",
+                        "name" : "Chalkboard",
                         "attributes" : {
                           "NSFontSizeAttribute" : 14,
-                          "NSFontNameAttribute" : "Arial-BoldItalicMT"
+                          "NSFontNameAttribute" : "Chalkboard"
                         },
-                        "family" : "Arial"
+                        "family" : "Chalkboard"
                       },
                       "location" : 0,
                       "text" : "Products\nSomething else"

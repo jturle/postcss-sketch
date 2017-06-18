@@ -21,10 +21,10 @@ class App extends React.Component {
         <div className={styles.test}></div>
         <Menu/>
         <br/>
-        <div style={{backgroundColor:'white',boxSizing:'border-box',display:'inline-block'}}>
         <div className={styles.symbolTest}>
           What's happening dude...
         </div>
+        <div style={{backgroundColor:'white',boxSizing:'border-box',display:'inline-block'}}>
         </div>
       </div>
     )

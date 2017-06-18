@@ -1,131 +1,12 @@
 import postcss, {plugin} from 'postcss';
 import valueParser from 'postcss-value-parser';
 import _ from 'lodash';
-import {execSync} from 'child_process';
 import path from 'path';
-import fs from 'fs';
-import md5 from 'md5';
 
-let cache = [];
-const __DEBUG__ = true;
-
-const getSketchJSON = (file) => {
-
-  // Quick Cache...
-  let hash = md5(file);
-  if (cache[hash])
-    return cache[hash];
-
-  let sketchToolLocation = '/Applications/Sketch Beta.app/Contents/Resources/sketchtool/bin/sketchtool';
-
-  // Suppor the non-beta version.
-  if (!fs.existsSync(sketchToolLocation))
-    sketchToolLocation = '/Applications/Sketch.app/Contents/Resources/sketchtool/bin/sketchtool';
-
-  if (fs.existsSync(sketchToolLocation)) {
-    if (fs.existsSync(file)) {
-      let cmd = '"' + path.resolve(sketchToolLocation) + '" dump ' + path.resolve(file);
-      let execResult = execSync(cmd);
-      if (__DEBUG__)
-        fs.writeFileSync('./reference.json', execResult);
-      return cache[hash] = JSON.parse(execResult);
-    } else {
-      throw( 'Sketch File Not Found: ' + file );
-    }
-  } else {
-    throw( 'Sketch Tool Not Found: ' + sketchToolLocation);
-  }
-};
-
-/**
- * Converts a Sketch RGBA to HTML5 RGBA
- * @param string
- * @returns {string}
- */
-const convRGBA = (string) => {
-  let x = string.substr(5, string.indexOf(')') - 5).split(',');
-  x[0] *= 255;
-  x[0] = Math.round(x[0]);
-  x[1] *= 255;
-  x[1] = Math.round(x[1]);
-  x[2] *= 255;
-  x[2] = Math.round(x[2]);
-  if (x[3]) {
-    x[3] = Math.round(x[3] * 100) / 100;
-  }
-  return 'rgba(' + x.join(',') + ')';
-};
-
-/**
- * Method to convert units from number in Sketch, to pixel string value...
- * @param unit
- * @returns {string}
- */
-const convUnit = (unit) => {
-  return ( Math.round(unit * 100) / 100 ) + 'px';
-};
-
-/**
- * Method to convert units from percent in Sketch, to percent HTML string value...
- * @param unit
- * @returns {string}
- */
-const percentUnit = (unit) => {
-  return Math.round(unit * 100) + '%';
-};
-
-const extractBackground = (fill) => {
-  if (fill.fillType == 0) { // Background-color
-    return {
-      prop: 'background-color',
-      value: _.get(fill, 'color.value')
-    };
-  }
-
-  if (fill.fillType == 1) { // Gradient
-    let gradRule;
-    switch (fill.gradient.gradientType) {
-      case 0:
-        gradRule = 'linear-gradient(0deg, ';
-        break;
-      case 1:
-        // console.log('Radial', fill );
-        /* Rectangle:
-         background-image: radial-gradient(26% 71%, #3023AE 17%, #C96DD8 85%);*/
-        gradRule = 'radial-gradient(' + percentUnit(fill.gradient.from.x) + ' ' + percentUnit(fill.gradient.to.y) + ', ';
-        break;
-    }
-    fill.gradient.stops.forEach((stop, idx) => {
-      // if( fill.gradient.gradientType == 1 )
-      //console.log(stop);
-      if (idx > 0)
-        gradRule += ', ';
-      gradRule += stop.color.value + ' ' + Math.round(stop.position * 100) + '%';
-    });
-    gradRule += ')';
-    return {
-      prop: 'background-image',
-      value: gradRule
-    };
-  }
-
-  return {prop: 'background', value: 'transparent'}
-};
-
-const processBorder = (border, parent) => {
-  parent.append({
-    prop: 'border-color',
-    value: border.color.value
-  });
-  parent.append({
-    prop: 'border-width',
-    value: convUnit(_.get(border, 'thickness'))
-  });
-  parent.append({
-    prop: 'border-style',
-    value: 'solid'
-  });
-};
+// Local imports...
+import {convRGBA,convUnit,percentUnit} from './helpers';
+import {getSketchJSON,clearLoaderCache} from './loader';
+import * as parser from './parsers';
 
 const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
   if (layer.hasBackgroundColor && layer.includeBackgroundColorInExport) {
@@ -133,7 +14,7 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
   } else {
     // Background/Fills
     if (layer.style && layer.style.fills.length && _.find(layer.style.fills, ['isEnabled', 1])) {
-      parent.append(extractBackground(_.find(layer.style.fills, ['isEnabled', 1])));
+      parent.append(parser.extractBackground(_.find(layer.style.fills, ['isEnabled', 1])));
     }
   }
 
@@ -146,7 +27,7 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
         sketchLayerToMixed(childLayer, newParent, nest, layer);
       }
       let boundingLayer = _.find(layer.layers, ['name', 'container']) || layer;
-      console.log( 'BoundingLayer', boundingLayer.name );
+      console.log('BoundingLayer', boundingLayer.name);
       if (childLayer.name == 'container')
         sketchLayerToMixed(childLayer, parent, nest, layer);
       if (childLayer.name == 'text')
@@ -235,12 +116,12 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
     }
     let font = _.get(layer.style, 'textStyle.NSFont.family');
     let fontName = layer.style.textStyle.NSFont.name.toLowerCase();
-    if (fontName.indexOf('italic'))
+    if (fontName.indexOf('italic') !== -1)
       parent.append({
         prop: 'font-style',
         value: 'italic'
       });
-    if (fontName.indexOf('bold'))
+    if (fontName.indexOf('bold') !== -1)
       parent.append({
         prop: 'font-weight',
         value: 'bold'
@@ -256,7 +137,7 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
 
   // Borders
   if (layer.style && layer.style.borders.length && _.find(layer.style.borders, ['isEnabled', 1])) {
-    processBorder(_.find(layer.style.borders, ['isEnabled', 1]), parent);
+    parser.processBorder(_.find(layer.style.borders, ['isEnabled', 1]), parent);
     //parent.append(extractBorder(_.find(layer.style.borders, ['isEnabled', 1])));
   }
 
@@ -287,8 +168,7 @@ module.exports = plugin('postcss-backwards', (opts) => {
   opts = opts || {};
   return (css, result) => {
 
-    // Clear cache every run
-    cache = [];
+    clearLoaderCache();
 
     let addedDep = false;
 
