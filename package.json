@@ -1,6 +1,6 @@
 {
   "name": "postcss-sketch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Playing with new sketch format...",
   "main": "lib/index.js",
   "repository": "git@github.com:jturle/postcss-sketch.git",
