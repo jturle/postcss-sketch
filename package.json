@@ -1,6 +1,6 @@
 {
   "name": "postcss-sketch",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Playing with new sketch format...",
   "main": "lib/index.js",
   "repository": "git@github.com:jturle/postcss-sketch.git",
@@ -10,10 +10,11 @@
   "scripts": {
     "build": "babel -d lib/ src/",
     "build:watch": "babel -w -d lib/ src/",
-    "test": "postcss test/test.css",
-    "test:menu": "postcss test/components/menu.css",
-    "test:watch": "postcss test/test.css -o ./test/output.css -w",
-    "dev": "webpack-dev-server --hot --watch"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack-dev-server --hot --watch",
+    "dev:test": "postcss test/test.css",
+    "dev:test:menu": "postcss test/components/menu.css",
+    "dev:test:watch": "postcss test/test.css -o ./test/output.css -w"
   },
   "babel": {
     "presets": [
@@ -76,6 +77,6 @@
     "webpack-hot-middleware": "^2.18.0"
   },
   "peerDependencies": {
-    "postcss-cssnext": "^2.11.0"
+    "postcss-nesting": "^4.0.1"
   }
 }

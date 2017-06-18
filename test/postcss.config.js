@@ -3,7 +3,7 @@ module.exports = (ctx) => ({
     // require("postcss-flexbugs-fixes")(),
     // require("postcss-custom-properties")(),
     // require("postcss-calc")(),
-    require("postcss-cssnext")(),
+    require("postcss-nesting")(),
     require("../lib")(),
   ]
 });
