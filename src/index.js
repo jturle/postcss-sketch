@@ -9,6 +9,7 @@ import {getSketchJSON, clearLoaderCache} from './loader';
 import * as parser from './parsers';
 
 module.exports = plugin('postcss-sketch', (opts) => {
+
     opts = opts || {};
     return (css, result) => {
 
