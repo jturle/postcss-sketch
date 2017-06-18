@@ -27,7 +27,7 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
         sketchLayerToMixed(childLayer, newParent, nest, layer);
       }
       let boundingLayer = _.find(layer.layers, ['name', 'container']) || layer;
-      console.log('BoundingLayer', boundingLayer.name);
+      //console.log('BoundingLayer', boundingLayer.name);
       if (childLayer.name == 'container')
         sketchLayerToMixed(childLayer, parent, nest, layer);
       if (childLayer.name == 'text')
