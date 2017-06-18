@@ -10,7 +10,7 @@ function run(input, output, opts) {
     });
 }
 
-it('replaces ampersand', () => {
+it('can load a font from a textStyle', () => {
   return run('a { font: sketch(\'./test/reference.json\').textStyle.Heading_H1; }',
     'a { font: 20px \'Helvetica Neue\'; color: rgba(143,143,143,1); }');
 });

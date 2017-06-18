@@ -105,7 +105,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "./node_modules/.bin/prettier --write"
+      "./node_modules/.bin/prettier --tab-width 4 --single-quote --write"
     ]
   },
   "eslintConfig": {
