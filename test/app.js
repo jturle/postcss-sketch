@@ -3,7 +3,8 @@ import { render } from 'react-dom';
 import 'semantic-ui-css/semantic.min.css';
 import styles from './test.css';
 
-// Components
+// Component Examples
+import ButtonExample from './components/button';
 import Menu from './components/menu';
 
 class App extends React.Component {
@@ -22,13 +23,16 @@ class App extends React.Component {
                     essentially unchanged. It was popularised in the 1960s with
                     the release of Letraset sheets containing Lorem Ipsum
                     passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum. From{' '}
+                    like Aldus PageMaker including versions of Lorem Ipsum.
+                    From{' '}
                     <a href="http://lipsum.lipsum.com/">lipsum.lipsum.com</a>
                 </p>
                 <div className={styles.sharedStyle}>
                     Complex Shared Style Test, featuring fills, border and
                     shadow.
                 </div>
+                <br />
+                <ButtonExample />
                 <Menu />
             </div>
         );

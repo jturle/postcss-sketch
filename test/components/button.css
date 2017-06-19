@@ -1,0 +1,11 @@
+.buttonPrimary {
+    &:global( .ui.primary.button ) {
+        extends: sketch('../tests.sketch').symbol.deep.PrimaryButton;
+    }
+}
+
+.buttonSecondary {
+&:global( .ui.secondary.button ) {
+     extends: sketch('../tests.sketch').symbol.deep.SecondaryButton;
+ }
+}

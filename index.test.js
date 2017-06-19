@@ -21,14 +21,14 @@ it('can load a Semi-Bold font from a textStyle', () => {
 it('can load a another font style from a textStyle', () => {
     return run(
         "div { font: sketch('" + sketchRef + "').textStyle.Headline_2; }",
-        "div { font-family: 'Roboto'; font-size: 22px; line-height: 32px; color: rgba(57,60,62,1); }"
+        "div { font-weight: 400; font-family: 'Roboto'; font-size: 22px; line-height: 32px; color: rgba(57,60,62,1); }"
     );
 });
 
 it('can extract a basic symbols textStyle', () => {
     return run(
         "div { extends: sketch('" + sketchRef + "').symbol.BasicSymbol; }",
-        "div { font-style: italic; font-family: 'Helvetica Neue'; font-size: 24px; color: rgba(0,0,0,1); }"
+        "div { font-style: italic; font-weight: 400; font-family: 'Helvetica Neue'; font-size: 24px; color: rgba(0,0,0,1); }"
     );
 });
 
@@ -90,14 +90,14 @@ it('can extract frame sizing', () => {
 it('can extract frame padding', () => {
     return run(
         "div { extends: sketch('" + sketchRef + "').symbol.TestFramePadding; }",
-        "div { padding-left: 18px; padding-top: 13px; padding-bottom: 60px; padding-right: 100px; text-align: left; font-style: italic; font-family: 'Helvetica Neue'; font-size: 14px; color: rgba(0,0,0,1); }"
+        "div { padding-left: 18px; padding-top: 13px; padding-bottom: 60px; padding-right: 100px; text-align: left; font-style: italic; font-weight: 400; font-family: 'Helvetica Neue'; font-size: 14px; color: rgba(0,0,0,1); }"
     );
 });
 
 it('can extract frame margin', () => {
     return run(
         "div { extends: sketch('" + sketchRef + "').symbol.TestFrameMargin; }",
-        "div { background-color: #F1F1F1; margin-left: 10px; margin-top: 5px; margin-right: 20px; margin-bottom: 15px; text-align: left; font-style: italic; font-family: 'Helvetica Neue'; font-size: 14px; color: rgba(0,0,0,1); }"
+        "div { background-color: #F1F1F1; margin-left: 10px; margin-top: 5px; margin-right: 20px; margin-bottom: 15px; text-align: left; font-style: italic; font-weight: 400; font-family: 'Helvetica Neue'; font-size: 14px; color: rgba(0,0,0,1); }"
     );
 });
 
