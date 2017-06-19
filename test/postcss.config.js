@@ -2,7 +2,8 @@ module.exports = ctx => ({
     plugins: [
         require('postcss-nesting')(),
         require('../lib')({
-            debugMode: true
+            debugMode: true,
+            cssModulesMode: true
         })
     ]
 });

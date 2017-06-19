@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i');
 
+body {
+    background-color: #EFF3F6;
+}
+
 .symbolTest {
     extends: sketch('./source_current.sketch').symbol.deep.Card;
 }
@@ -58,29 +62,19 @@ a {
     extends: sketch('./tests.sketch').symbol.TestRadialBackground;
 }
 
-/*
+.testButton.ui.primary.button {
+    extends: sketch('./tests.sketch').symbol.deep.PrimaryButton;
+}
+
+.testButton.ui.secondary.button {
+    extends: sketch('./tests.sketch').symbol.deep.SecondaryButton;
+}
+
+/* Playground UI */
+.topBar {
+    extends: sketch('./tests.sketch').symbol.deep.UITopBar;
+}
+
 .container {
-    flex-grow: 1;
+    padding: 2rem;
 }
-
-h1 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H1;
-}
-
-h2 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H2;
-}
-
-.headerBar {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar;
-}
-
-.headerBar2 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar2;
-}
-
-.headerBar3 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;
-}
-
- */

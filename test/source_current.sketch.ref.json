@@ -4277,7 +4277,7 @@
               "isLocked" : 0,
               "layerListExpandedType" : 1,
               "nameIsFixed" : 1,
-              "name" : "item:hover"
+              "name" : ".item:hover"
             },
             {
               "shouldBreakMaskChain" : 0,
@@ -4896,7 +4896,7 @@
               "isLocked" : 0,
               "layerListExpandedType" : 1,
               "nameIsFixed" : 1,
-              "name" : "item.active"
+              "name" : ".item.active"
             },
             {
               "shouldBreakMaskChain" : 0,
@@ -5515,7 +5515,7 @@
               "isLocked" : 0,
               "layerListExpandedType" : 2,
               "nameIsFixed" : 1,
-              "name" : "item.active:hover"
+              "name" : ".item.active:hover"
             },
             {
               "shouldBreakMaskChain" : 0,
@@ -5820,7 +5820,7 @@
               "isLocked" : 0,
               "layerListExpandedType" : 2,
               "nameIsFixed" : 1,
-              "name" : "item"
+              "name" : ".item"
             },
             {
               "isFlippedHorizontal" : 0,
