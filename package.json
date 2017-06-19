@@ -1,6 +1,6 @@
 {
   "name": "postcss-sketch",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "PostCSS plugin that provides deep bindings between sketch files and your CSS.",
   "main": "lib/index.js",
   "repository": "jturle/postcss-sketch",
