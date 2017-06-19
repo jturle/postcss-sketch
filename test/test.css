@@ -2,6 +2,44 @@
     extends: sketch('./source_current.sketch').symbol.deep.Card;
 }
 
+h1 {
+    font: sketch('./tests.sketch').textStyle.Headline_1;
+}
+
+h2 {
+    font: sketch('./tests.sketch').textStyle.Headline_2;
+}
+
+p {
+    font: sketch('./tests.sketch').textStyle.Body;
+}
+
+a {
+    font: sketch('./tests.sketch').textStyle.Link;
+}
+
+.missing {
+    /*font: sketch('./tests.sketch').textStyle.MissingStyle;*/
+}
+
+.sharedStyle {
+    extends: sketch('./tests.sketch').sharedStyle.Complex;
+    padding: 1rem;
+}
+
+.buttonPrimary {
+    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimary;
+}
+
+.buttonPrimary:hover {
+    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimaryHover;
+}
+
+.buttonPrimary:active, buttonPrimary.active {
+    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimaryActive;
+}
+
+
 .basicSymbolTest {
     extends: sketch('./tests.sketch').symbol.BasicSymbol;
 }
