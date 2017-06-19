@@ -5,7 +5,7 @@ import _ from 'lodash';
 import path from 'path';
 
 // Local imports...
-import { convUnit, percentUnit, appendRules } from './helpers';
+import { convUnit, percentUnit, appendRules, findSymbol } from './helpers';
 import {
     getSketchJSON,
     clearLoaderCache,
@@ -57,14 +57,7 @@ module.exports = plugin('postcss-sketch', opts => {
                         parsedValue.nodes[1].value.indexOf('.symbol.deep') === 0
                     ) {
                         let symbolName = parsedValue.nodes[1].value.substr(13);
-                        let symbols = _.find(sketchData.pages, [
-                            'name',
-                            'Symbols'
-                        ]);
-                        let symbol = _.find(symbols.layers, [
-                            'name',
-                            symbolName
-                        ]);
+                        let symbol = findSymbol(sketchData.pages, symbolName);
                         if (!symbol) {
                             decl.warn(
                                 result,
@@ -78,14 +71,7 @@ module.exports = plugin('postcss-sketch', opts => {
                     } else {
                         // Symbols
                         let symbolName = parsedValue.nodes[1].value.substr(8);
-                        let symbols = _.find(sketchData.pages, [
-                            'name',
-                            'Symbols'
-                        ]);
-                        let symbol = _.find(symbols.layers, [
-                            'name',
-                            symbolName
-                        ]);
+                        let symbol = findSymbol(sketchData.pages, symbolName);
                         if (!symbol) {
                             decl.warn(result, 'Missing symbol: ' + symbolName);
                         } else {

@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 /**
  * Converts a Sketch RGBA to HTML5 RGBA
  * @param string
@@ -41,4 +43,13 @@ export const appendRules = (decl, rules) => {
         if (Array.isArray(rules)) rules.forEach(rule => decl.append(rule));
         else decl.append(rules);
     }
+};
+
+export const findSymbol = (pages, name) => {
+    let found = false;
+    pages.forEach(page => {
+        let symbol = _.find(page.layers, ['name', name]);
+        if (symbol && symbol['<class>'] === 'MSSymbolMaster') found = symbol;
+    });
+    return found;
 };
