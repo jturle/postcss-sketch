@@ -31,6 +31,7 @@
   ],
   "dependencies": {
     "lodash": "^4.17.4",
+    "md5": "^2.2.1",
     "path": "^0.12.7",
     "postcss": "^6.0.1",
     "postcss-nesting": "^4.0.1",
@@ -50,7 +51,6 @@
     "husky": "^0.13.4",
     "jest": "^20.0.0",
     "lint-staged": "^4.0.0",
-    "md5": "^2.2.1",
     "null-loader": "^0.1.1",
     "postcss-calc": "^6.0.0",
     "postcss-cli": "^4.1.0",
