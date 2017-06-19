@@ -1,11 +1,11 @@
 /* eslint-disable complexity */
-import postcss, { plugin } from 'postcss';
+import { plugin } from 'postcss';
 import valueParser from 'postcss-value-parser';
 import _ from 'lodash';
 import path from 'path';
 
 // Local imports...
-import { convRGBA, convUnit, percentUnit } from './helpers';
+import { convUnit, percentUnit, appendRules } from './helpers';
 import {
     getSketchJSON,
     clearLoaderCache,
@@ -220,44 +220,11 @@ module.exports = plugin('postcss-sketch', opts => {
                             'Missing text style: ' + textStyleName
                         );
                     } else {
-                        // Do the font family & size...
-                        let fontName = _.get(
-                            style.value.textStyle,
-                            'NSFont.family'
-                        );
-                        /* eslint-disable */
-                        decl.parent.append({
-                            prop: 'font-family',
-                            value: "'" + fontName + "'"
-                        });
-                        /* eslint-enable */
-                        decl.parent.append({
-                            prop: 'font-size',
-                            value: convUnit(
-                                _.get(
-                                    style.value.textStyle,
-                                    'NSFont.attributes.NSFontSizeAttribute'
-                                )
-                            )
-                        });
-
-                        // Do the font color...
-                        if (_.has(style.value, 'textStyle.NSColor.color')) {
-                            const color = postcss.decl({
-                                prop: 'color',
-                                value: convRGBA(
-                                    _.get(
-                                        style.value,
-                                        'textStyle.NSColor.color'
-                                    )
-                                )
-                            });
-                            decl.parent.append(color);
-                        }
-
-                        // Remove original
-                        decl.remove();
+                        let textStyle = style.value.textStyle;
+                        appendRules(decl.parent, parser.textStyle(textStyle));
                     }
+                    // Remove original
+                    decl.remove();
                 }
             }
         });
