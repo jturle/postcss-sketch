@@ -1,3 +1,5 @@
-.menuContainer :global( .ui.menu ) {
-    extends: sketch('../source_current.sketch').symbol.deep.MenuComponent;
+.menuContainer {
+    &:global( .ui.menu ) {
+        extends: sketch('../source_current.sketch').symbol.deep.MenuComponent;
+    }
 }
