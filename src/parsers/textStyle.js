@@ -9,34 +9,25 @@ export default textStyle => {
             prop: 'font-style',
             value: 'italic'
         });
-    if (fontName.indexOf('light') !== -1)
-        rules.push({
-            prop: 'font-weight',
-            value: '300'
-        });
-    if (fontName.indexOf('medium') !== -1)
-        rules.push({
-            prop: 'font-weight',
-            value: '500'
-        });
+
+    let weight = 400;
+
+    if (fontName.indexOf('light') !== -1) weight = 300;
+    if (fontName.indexOf('medium') !== -1) weight = 500;
     if (
         fontName.indexOf('bold') !== -1 &&
         (fontName.indexOf('semi') !== -1 || fontName.indexOf('demi') !== -1)
     )
-        rules.push({
-            prop: 'font-weight',
-            value: '600'
-        });
-    if (fontName.indexOf('bold') !== -1)
-        rules.push({
-            prop: 'font-weight',
-            value: '700'
-        });
+        weight = 600;
+    if (fontName.indexOf('bold') !== -1) weight = 700;
     if (fontName.indexOf('heavy') !== -1 || fontName.indexOf('black') !== -1)
-        rules.push({
-            prop: 'font-weight',
-            value: '900'
-        });
+        weight = 900;
+
+    rules.push({
+        prop: 'font-weight',
+        value: weight
+    });
+
     if (font !== '.SF NS Text')
         rules.push({
             prop: 'font-family',

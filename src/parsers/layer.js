@@ -30,7 +30,10 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
             ) {
                 let newParent = parent.cloneBefore();
                 newParent.removeAll();
-                newParent.selector += ' :global(.' + childLayer.name + ')';
+                let childName = childLayer.name;
+                if (childName.substring(0, 1) !== ':')
+                    newParent.selector += ' :global(.' + childName + ')';
+                else newParent.selector += childName;
                 sketchLayerToMixed(childLayer, newParent, nest, layer);
             }
             let boundingLayer =
