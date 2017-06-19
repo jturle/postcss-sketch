@@ -2,7 +2,13 @@ import _ from 'lodash';
 import * as parser from './';
 import { convRGBA, convUnit, percentUnit, appendRules } from '../helpers';
 
-const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
+const sketchLayerToMixed = (
+    layer,
+    parent,
+    opts,
+    nest = true,
+    parentLayer = null
+) => {
     // Background/Fills
     if (layer.hasBackgroundColor && layer.includeBackgroundColorInExport) {
         parent.append({
@@ -26,23 +32,32 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
         layer.layers.forEach(childLayer => {
             if (
                 nest &&
-                ['text', 'container', 'Path'].indexOf(childLayer.name) == -1
+                ['.', ':'].indexOf(childLayer.name.substring(0, 1)) !== -1
             ) {
                 let newParent = parent.cloneBefore();
                 newParent.removeAll();
                 let childName = childLayer.name;
-                if (childName.substring(0, 1) !== ':')
-                    newParent.selector += ' :global(.' + childName + ')';
-                else newParent.selector += childName;
-                sketchLayerToMixed(childLayer, newParent, nest, layer);
+                if (childName.substring(0, 1) !== ':') {
+                    if (opts.cssModulesMode)
+                        newParent.selector += ' :global(' + childName + ')';
+                    else newParent.selector += ' ' + childName;
+                } else {
+                    newParent.selector += childName;
+                }
+                sketchLayerToMixed(childLayer, newParent, opts, nest, layer);
             }
             let boundingLayer =
                 _.find(layer.layers, ['name', 'container']) || layer;
-            //console.log('BoundingLayer', boundingLayer.name);
             if (childLayer.name == 'container')
-                sketchLayerToMixed(childLayer, parent, nest, layer);
+                sketchLayerToMixed(childLayer, parent, opts, nest, layer);
             if (childLayer.name == 'text')
-                sketchLayerToMixed(childLayer, parent, nest, boundingLayer);
+                sketchLayerToMixed(
+                    childLayer,
+                    parent,
+                    opts,
+                    nest,
+                    boundingLayer
+                );
         });
     }
 
@@ -76,18 +91,6 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
                 parent.append({ prop: 'text-align', value: 'left' });
                 break;
         }
-        if (
-            layer.style.textStyle.NSParagraphStyle.style.maximumLineHeight !== 0
-        ) {
-            parent.append({
-                prop: 'line-height',
-                value: convUnit(
-                    layer.style.textStyle.NSParagraphStyle.style
-                        .maximumLineHeight
-                )
-            });
-        }
-
         appendRules(parent, parser.textStyle(layer.style.textStyle));
     }
 
@@ -108,7 +111,7 @@ const sketchLayerToMixed = (layer, parent, nest = true, parentLayer = null) => {
     if (path) appendRules(parent, parser.path(path));
 
     // Do the box shadow...
-    if (_.find(layer.style.shadows, ['isEnabled', 1])) {
+    if (layer.style && _.find(layer.style.shadows, ['isEnabled', 1])) {
         let shadow = _.find(layer.style.shadows, ['isEnabled', 1]);
         let shadowRule = convUnit(shadow.offsetX);
         shadowRule += ' ' + convUnit(shadow.offsetY);

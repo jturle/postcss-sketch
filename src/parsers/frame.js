@@ -76,12 +76,14 @@ export default (layerType, frame, parentFrame, resizingConstraint) => {
                 prop: 'margin-right',
                 value: convUnit(marginRight)
             });
-        let marginBottom = parentFrame.height - frame.y - frame.height;
-        if (marginBottom !== 0)
-            rules.push({
-                prop: 'margin-bottom',
-                value: convUnit(marginBottom)
-            });
+        if ((resizingConstraint & FLAG_D) === 0) {
+            let marginBottom = parentFrame.height - frame.y - frame.height;
+            if (marginBottom !== 0)
+                rules.push({
+                    prop: 'margin-bottom',
+                    value: convUnit(marginBottom)
+                });
+        }
     }
     return rules;
 };

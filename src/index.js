@@ -15,13 +15,18 @@ import {
 import * as parser from './parsers';
 
 module.exports = plugin('postcss-sketch', opts => {
-    opts = opts || {};
+    opts = _.assignIn(
+        {
+            debugMode: false,
+            noCache: false,
+            cssModulesMode: true
+        },
+        opts || {}
+    );
     if (_.get(opts, 'debugMode', false)) enableDebugMode();
     if (_.get(opts, 'noCache', false)) disableCache();
     return (css, result) => {
         clearLoaderCache();
-
-        let addedDep = false;
 
         // Runs through all of the nodes (declorations) in the file
         css.walkDecls(decl => {
@@ -43,14 +48,12 @@ module.exports = plugin('postcss-sketch', opts => {
                 let sketchData = getSketchJSON(path.resolve(fileRef));
 
                 // Add a dependency.
-                if (!addedDep) {
-                    result.messages.push({
-                        type: 'dependency',
-                        file: fileRef,
-                        parent: css.source.input.file
-                    });
-                    addedDep = true;
-                }
+                result.messages.push({
+                    type: 'dependency',
+                    file: fileRef,
+                    parent: css.source.input.file
+                });
+
                 // Symbols
                 if (parsedValue.nodes[1].value.indexOf('.symbol') === 0) {
                     if (
@@ -64,7 +67,7 @@ module.exports = plugin('postcss-sketch', opts => {
                                 'Missing symbol deep: ' + symbolName
                             );
                         } else {
-                            parser.processLayer(symbol, decl.parent);
+                            parser.processLayer(symbol, decl.parent, opts);
                             // Finally remove it...
                             decl.remove();
                         }
@@ -75,7 +78,12 @@ module.exports = plugin('postcss-sketch', opts => {
                         if (!symbol) {
                             decl.warn(result, 'Missing symbol: ' + symbolName);
                         } else {
-                            parser.processLayer(symbol, decl.parent, false);
+                            parser.processLayer(
+                                symbol,
+                                decl.parent,
+                                opts,
+                                false
+                            );
                             // Finally remove it...
                             decl.remove();
                         }
