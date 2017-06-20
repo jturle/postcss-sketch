@@ -10,10 +10,12 @@
     "precommit": "lint-staged",
     "build": "babel -d lib/ src/",
     "build:watch": "babel -w -d lib/ src/",
-    "test": "jest && eslint src/*.js",
+    "link": "eslint src/*.js",
+    "test": "jest",
     "test:coverage": "jest --coverage",
     "dev": "webpack-dev-server --hot --watch",
     "dev:test": "postcss test/test.css",
+    "dev:test:quick": "postcss test/quick.css",
     "dev:test:menu": "postcss test/components/menu.css",
     "dev:test:watch": "postcss test/test.css -o ./test/output.css -w"
   },

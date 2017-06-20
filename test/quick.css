@@ -1,0 +1,7 @@
+.featureEventPNG {
+    background-image: sketch('./tests.sketch').backgroundPNG.FeatureEvent;
+}
+
+.featureEventSVG {
+    background-image: sketch('./tests.sketch').backgroundSVG.FeatureEvent;
+}

@@ -40,6 +40,7 @@ class App extends React.Component {
                     <br />
                     <ButtonExample />
                     <Menu />
+                    <div className="featureEvent"></div>
                 </div>
             </div>
         );

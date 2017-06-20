@@ -21,6 +21,52 @@ export const enableDebugMode = () => {
     __DEBUG__ = true;
 };
 
+export const getSketchImage = (file, id, format = 'png') => {
+    let sketchToolLocation =
+        '/Applications/Sketch Beta.app/' +
+        'Contents/Resources/sketchtool/bin/sketchtool';
+
+    // Support the non-beta version.
+    if (!fs.existsSync(sketchToolLocation))
+        sketchToolLocation =
+            '/Applications/Sketch.app/' +
+            'Contents/Resources/sketchtool/bin/sketchtool';
+
+    if (fs.existsSync(sketchToolLocation)) {
+        if (fs.existsSync(file)) {
+            let scaleCmd = '';
+            let suffix = '.';
+            if (format == 'png') {
+                scaleCmd = ' --scale=2';
+                suffix = '@2x.';
+            }
+
+            let cmd =
+                '"' +
+                path.resolve(sketchToolLocation) +
+                '" export layers ' +
+                path.resolve(file) +
+                ' --use-id-for-name=YES ' +
+                scaleCmd +
+                ' --format=' +
+                format +
+                ' --items=' +
+                id +
+                ' --output="' +
+                path.dirname(file) +
+                '/exports"';
+            execSync(cmd);
+            let outFile =
+                path.dirname(file) + '/exports/' + id + suffix + format;
+            if (fs.existsSync(outFile)) {
+                return fs.readFileSync(outFile);
+            } else {
+                throw Error('Unable to extract image: ' + id);
+            }
+        }
+    }
+};
+
 export const getSketchJSON = file => {
     // Quick Cache...
     let hash = md5(file);

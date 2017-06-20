@@ -8,6 +8,7 @@ import path from 'path';
 import { convUnit, percentUnit, appendRules, findSymbol } from './helpers';
 import {
     getSketchJSON,
+    getSketchImage,
     clearLoaderCache,
     disableCache,
     enableDebugMode
@@ -53,6 +54,51 @@ module.exports = plugin('postcss-sketch', opts => {
                     file: fileRef,
                     parent: css.source.input.file
                 });
+
+                // Image SVG - Very basic POC - must set the width and height of the container manually.
+                // All references saved inline
+                // DO NOT ABUSE :)
+                if (
+                    parsedValue.nodes[1].value.indexOf('.backgroundSVG') === 0
+                ) {
+                    let symbolName = parsedValue.nodes[1].value.substr(15);
+                    let symbol = findSymbol(sketchData.pages, symbolName);
+                    if (symbol) {
+                        let svg = getSketchImage(
+                            fileRef,
+                            symbol.objectID,
+                            'svg'
+                        );
+                        decl.value =
+                            'url(data:image/svg+xml;base64,' +
+                            svg.toString('base64') +
+                            ')';
+                    }
+                }
+
+                // Image PNG - Very basic POC - must set the width and height of the container manually.
+                // DO NOT ABUSE :)
+                if (
+                    parsedValue.nodes[1].value.indexOf('.backgroundPNG') === 0
+                ) {
+                    let symbolName = parsedValue.nodes[1].value.substr(15);
+                    let symbol = findSymbol(sketchData.pages, symbolName);
+                    if (symbol) {
+                        let png = getSketchImage(
+                            fileRef,
+                            symbol.objectID,
+                            'png'
+                        );
+                        decl.value =
+                            'url(data:image/png;base64,' +
+                            png.toString('base64') +
+                            ')';
+                        appendRules(decl.parent, {
+                            prop: 'background-size',
+                            value: '100% 100%'
+                        });
+                    }
+                }
 
                 // Symbols
                 if (parsedValue.nodes[1].value.indexOf('.symbol') === 0) {

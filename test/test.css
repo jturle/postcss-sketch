@@ -64,3 +64,9 @@ a {
 .missing {
     /*font: sketch('./tests.sketch').textStyle.MissingStyle;*/
 }
+
+.featureEvent {
+    background-image: sketch('./tests.sketch').backgroundPNG.FeatureEvent;
+    width: 420px;
+    height: 290px;
+}
