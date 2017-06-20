@@ -5,7 +5,7 @@ etc directly into CSS from [SketchApp](https://sketchapp.com/) using
 [PostCSS](https://github.com/postcss/postcss).
 
 ## TL;DR
-![](https://giphy.com/gifs/1oxbgwR0ExxjG/html5)
+![](https://media.giphy.com/media/1oxbgwR0ExxjG/giphy.gif)
 
 [1-min video in action](https://www.youtube.com/watch?v=tCx5az-QR5M)
 
