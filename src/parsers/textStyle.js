@@ -46,6 +46,26 @@ export default textStyle => {
             value: convUnit(textStyle.NSParagraphStyle.style.minimumLineHeight)
         });
 
+    // Add text-align for anything that isnt left
+    if (textStyle.NSParagraphStyle.style.alignment) {
+        let alignment;
+        switch (textStyle.NSParagraphStyle.style.alignment) {
+            case 1:
+                alignment = 'right';
+                break;
+            case 2:
+                alignment = 'center';
+                break;
+            case 3:
+                alignment = 'justify';
+                break;
+            default:
+                alignment = 'left';
+                break;
+        }
+        rules.push({ prop: 'text-align', value: alignment });
+    }
+
     // Do the font color
     rules.push({
         prop: 'color',
