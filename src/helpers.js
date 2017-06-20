@@ -48,8 +48,9 @@ export const appendRules = (decl, rules) => {
 export const findSymbol = (pages, name) => {
     let found = false;
     pages.forEach(page => {
-        let symbol = _.find(page.layers, ['name', name]);
-        if (symbol && symbol['<class>'] === 'MSSymbolMaster') found = symbol;
+        let symbols = _.filter(page.layers, ['<class>', 'MSSymbolMaster']);
+        let symbol = _.find(symbols, ['name', name]);
+        if (symbol) found = symbol;
     });
     return found;
 };

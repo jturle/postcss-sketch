@@ -68,8 +68,6 @@ module.exports = plugin('postcss-sketch', opts => {
                             );
                         } else {
                             parser.processLayer(symbol, decl.parent, opts);
-                            // Finally remove it...
-                            decl.remove();
                         }
                     } else {
                         // Symbols
@@ -84,10 +82,10 @@ module.exports = plugin('postcss-sketch', opts => {
                                 opts,
                                 false
                             );
-                            // Finally remove it...
-                            decl.remove();
                         }
                     }
+                    // Finally remove it...
+                    decl.remove();
                 }
 
                 // Shared Styles
