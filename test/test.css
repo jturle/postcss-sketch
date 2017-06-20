@@ -4,10 +4,6 @@ body {
     background-color: #EFF3F6;
 }
 
-.symbolTest {
-    extends: sketch('./source_current.sketch').symbol.deep.Card;
-}
-
 h1 {
     font: sketch('./tests.sketch').textStyle.Headline_1;
 }
@@ -24,10 +20,6 @@ a {
     font: sketch('./tests.sketch').textStyle.Link;
 }
 
-.missing {
-    /*font: sketch('./tests.sketch').textStyle.MissingStyle;*/
-}
-
 .sharedStyle {
     extends: sketch('./tests.sketch').sharedStyle.Complex;
     padding: 1rem;
@@ -36,15 +28,6 @@ a {
 .buttonPrimary {
     extends: sketch('./tests.sketch').sharedStyle.ButtonPrimary;
 }
-
-.buttonPrimary:hover {
-    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimaryHover;
-}
-
-.buttonPrimary:active, buttonPrimary.active {
-    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimaryActive;
-}
-
 
 .basicSymbolTest {
     extends: sketch('./tests.sketch').symbol.BasicSymbol;
@@ -62,19 +45,22 @@ a {
     extends: sketch('./tests.sketch').symbol.TestRadialBackground;
 }
 
-.testButton.ui.primary.button {
+.ui.primary.button {
     extends: sketch('./tests.sketch').symbol.deep.PrimaryButton;
 }
 
-.testButton.ui.secondary.button {
+.ui.secondary.button {
     extends: sketch('./tests.sketch').symbol.deep.SecondaryButton;
 }
 
-/* Playground UI */
 .topBar {
     extends: sketch('./tests.sketch').symbol.deep.UITopBar;
 }
 
-.container {
-    padding: 2rem;
+.menuContainer.ui.menu {
+    extends: sketch('./tests.sketch').symbol.deep.UIMenu;
+}
+
+.missing {
+    /*font: sketch('./tests.sketch').textStyle.MissingStyle;*/
 }

@@ -11,8 +11,8 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className={styles.topBar}>Hello</div>
-                <div className={styles.container}>
+                <div className="topBar">Hello</div>
+                <div className="container">
                     <h1>PostCSS Sketch Plugin</h1>
                     <h2>What is Lorem Ipsum?</h2>
                     <p>

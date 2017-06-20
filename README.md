@@ -1,127 +1,209 @@
-# PostCSS-Sketch [![Build Status](https://travis-ci.org/jturle/postcss-sketch.svg?branch=master)](https://travis-ci.org/jturle/postcss-sketch)
-Just playing with pulling Sketch colours, styles etc directly into postcss references.
+# PostCSS-Sketch Plugin - [![Build Status](https://travis-ci.org/jturle/postcss-sketch.svg?branch=master)](https://travis-ci.org/jturle/postcss-sketch)
 
-Please ignore the horrible design in the examples etc.
+Just playing with bringing [Sketch](https://sketchapp.com/) colours, styles, structure,
+etc directly into CSS from [SketchApp](https://sketchapp.com/) using
+[PostCSS](https://github.com/postcss/postcss).
 
-## Currently Supports
+## Currently Supported Sketch Attributes
 
-- textStyles (font, size, color)
-- sharedStyles (opacity, background, border)
+- textStyles
+    - font, size, color, line-height, weight, style
+- sharedStyles (background, border)
+    - fills
+        - solid background
+        - linear background
+        - radial background
+    - border
+        - color & width
+    - box-shadow
+        - done
+    - padding, margins etc (needs work)
+- symbols
+    - all of the above, nested
 
-## POC for text styles atm...
+## TODO
 
+- Improve documentation (Ughhh - Options, Design Tips)
+- Remove repetition for nested items
+- Sort out ordering of rules
+- Update reference structure? @extends?
+- Supprt image assets & SVG
+
+## Quick example...
+
+### This "CSS"...
 ```css
 h1 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H1;
+    font: sketch('./tests.sketch').textStyle.Headline_1;
 }
 
 h2 {
-    font: sketch('./source_current.sketch').textStyle.Heading_H2;
+    font: sketch('./tests.sketch').textStyle.Headline_2;
 }
 
-.headerBar {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar;
+p {
+    font: sketch('./tests.sketch').textStyle.Body;
 }
 
-.headerBar2 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar2;
+a {
+    font: sketch('./tests.sketch').textStyle.Link;
 }
 
-.headerBar3 {
-    extends: sketch('./source_current.sketch').sharedStyle.HeaderBar3;
+.sharedStyle {
+    extends: sketch('./tests.sketch').sharedStyle.Complex;
+    padding: 1rem;
+}
+
+.buttonPrimary {
+    extends: sketch('./tests.sketch').sharedStyle.ButtonPrimary;
+}
+
+.basicSymbolTest {
+    extends: sketch('./tests.sketch').symbol.BasicSymbol;
+}
+
+.testBackground {
+    extends: sketch('./tests.sketch').symbol.TestBackground;
+}
+
+.testLinearBackground {
+    extends: sketch('./tests.sketch').symbol.TestLinearBackground;
+}
+
+.testRadialBackground {
+    extends: sketch('./tests.sketch').symbol.TestRadialBackground;
 }
 ```
 
-### Becomes
-
+### Becomes this CSS
 ```css
 h1 {
-    font: 20px 'Helvetica Neue';
-    color: rgba(143,143,143,1.000000);
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-size: 32px;
+    line-height: 44px;
+    color: rgba(57,60,62,1);
 }
 
 h2 {
-    font: 14px 'Helvetica Neue';
-    color: rgba(0,0,0,1.000000);
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 22px;
+    line-height: 32px;
+    color: rgba(57,60,62,1);
 }
 
-.headerBar {
-    opacity: 0.7497169384057971;
-    background-color: rgba(187,80,80,0.47);
-    border: 1px solid #155AEF;
-    box-shadow: 6px 6px 3px 2px rgba(253,3,3,0.50);
+p {
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(113,120,126,1);
 }
 
-.headerBar2 {
-    background-image: linear-gradient(90deg, #3023AE 0%, #53A0FE 48%, #B4ED50 100%);
+a {
+    font-weight: 500;
+    font-family: 'Roboto';
+    font-size: 16px;
+    line-height: 24px;
+    color: rgba(0,174,239,1);
 }
 
-.headerBar3 {
-    background-image: radial-gradient(50% 64%, #3023AE 0%, #C96DD8 100%);
+.sharedStyle {
+    background-color: #DDDDDD;
+    border: 1px solid #979797;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+    padding: 1rem;
+}
+
+.buttonPrimary {
+    background-image: linear-gradient(90deg, #39B54A 0%, #34AA44 98%);
+}
+
+.basicSymbolTest {
+    font-style: italic;
+    font-weight: 400;
+    font-family: 'Helvetica Neue';
+    font-size: 24px;
+    color: rgba(0,0,0,1);
+}
+
+.testBackground {
+    background-color: #D8D8D8;
+}
+
+.testLinearBackground {
+    background-image: linear-gradient(0deg, #B4EC51 0%, #429321 100%);
+}
+
+.testRadialBackground {
+    background-image: radial-gradient(50% 44%, #3023AE 0%, #C86DD7 100%);
 }
 ```
 
 ### Based on 'test/source.sketch'
 
-![Image of Sketch file](./doc/source_current.png)
+![Image of Sketch file](./doc/tests.png)
 
-### Nested Symbol Support
+## Nested Symbol Support
 
 Little demo of working with a semantic-ui-react Menu component...
+Check out the tests.sketch file to see the naming convention for nesting.
 
-## One line of CSS
+### One line of "CSS"
 ```css
 .menuContainer.ui.menu {
-    extends: sketch('../source_current.sketch').symbol.deep.MenuComponent;
+    extends: sketch('./tests.sketch').symbol.deep.UIMenu;
 }
 ```
-## Becomes (Output for CSS modules atm...)
+### Becomes the following (accurate) mess CSS
 ```css
-.menuContainer.ui.menu :global(.item:hover) {
-    background-image: linear-gradient(0deg, #0B7BD0 0%, #2DA1F8 100%);
-    border-radius: 3px;
-    text-align: left;
-    font-size: 14px;
-    color: rgba(255,255,255,1);
-}
-.menuContainer.ui.menu :global(.item.active) {
+.menuContainer.ui.menu .item.active:hover {
     background-image: linear-gradient(0deg, #1991EB 0%, #2DA1F8 100%);
-    border-radius: 4px;
     text-align: left;
+    font-weight: 400;
+    font-family: 'Roboto';
     font-size: 14px;
     color: rgba(255,255,255,1);
 }
-.menuContainer.ui.menu :global(.item.active:hover) {
-    background-image: linear-gradient(0deg, #1BBA43 0%, #1D9F2F 100%);
-    border-radius: 4px;
+
+.menuContainer.ui.menu .item.active {
+    background-image: linear-gradient(0deg, #1991EB 0%, #2DA1F8 100%);
     text-align: left;
+    font-weight: 400;
+    font-family: 'Roboto';
     font-size: 14px;
     color: rgba(255,255,255,1);
 }
-.menuContainer.ui.menu :global(.item) {
+
+.menuContainer.ui.menu .item:hover {
+    background-image: linear-gradient(0deg, #1991EB 0%, #2DA1F8 100%);
     text-align: left;
-    font-family: 'Chalkboard';
+    font-weight: 400;
+    font-family: 'Roboto';
+    font-size: 14px;
+    color: rgba(255,255,255,1);
+}
+
+.menuContainer.ui.menu .item {
+    text-align: left;
+    font-weight: 400;
+    font-family: 'Roboto';
     font-size: 14px;
     color: rgba(53,64,82,1);
-}
-.menuContainer.ui.menu {
-    background-color: #FFFFFF;
-    text-align: left;
-    font-family: 'Arial';
-    font-size: 12px;
-    color: rgba(159,169,186,1);
 }
 ```
 
 ## Try it?
 
-Clone the package, `yarn install`, `yarn dev`, visit http://localhost:8080. Open `source_current.sketch`. Have a play!
+Clone the package, `yarn install`, `yarn dev`, visit http://localhost:8080.
+Open `tests.sketch`. Have a play!
 
-## Use it?
+## Use it? - Installation
 
-`yarn add postcss-sketch` - good luck :/
+`yarn add postcss-sketch --dev` - good luck :/ let me know how you go...
 
-Add the plugin to the postcss configuration.
+Add the plugin to your PostCSS configuration.
 
 ```js
 module.exports = (ctx) => ({
@@ -131,3 +213,11 @@ module.exports = (ctx) => ({
   ]
 });
 ```
+
+## Bonus Feature!
+
+One of the coolest things about using [postcss](https://github.com/postcss) with
+[postcss-sketch](https://github.com/jturle/postcss-sketch) is that once the bindings
+are setup, you can modify the sketch styles & design and watch your web app/site
+update in real-time using the magic of [webpack](https://github.com/webpack),
+and [webpack-dev-server](https://github.com/webpack/webpack-dev-server).

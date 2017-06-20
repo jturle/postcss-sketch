@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Dropdown, Menu } from 'semantic-ui-react';
-import styles from './menu.css';
 
 export default class MenuExampleVerticalDropdown extends Component {
     state = { activeItem: 'account' };
@@ -11,7 +10,7 @@ export default class MenuExampleVerticalDropdown extends Component {
         const { activeItem } = this.state;
 
         return (
-            <Menu vertical className={'menuContainer ' + styles.menuContainer}>
+            <Menu vertical className="menuContainer">
                 <Menu.Item
                     name="account"
                     active={activeItem === 'account'}

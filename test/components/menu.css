@@ -1,5 +1,0 @@
-.menuContainer {
-    &:global( .ui.menu ) {
-        extends: sketch('../tests.sketch').symbol.deep.UIMenu;
-    }
-}
