@@ -105,7 +105,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
+    "src/**/*.js": [
       "./node_modules/.bin/prettier --tab-width 4 --single-quote --write",
       "git add"
     ]

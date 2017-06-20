@@ -60,10 +60,10 @@ export default textStyle => {
                 alignment = 'justify';
                 break;
             default:
-                alignment = 'left';
+                alignment = false;
                 break;
         }
-        rules.push({ prop: 'text-align', value: alignment });
+        if (alignment) rules.push({ prop: 'text-align', value: alignment });
     }
 
     // Do the font color
