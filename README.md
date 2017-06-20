@@ -4,6 +4,9 @@ Just playing with bringing [Sketch](https://sketchapp.com/) colours, styles, str
 etc directly into CSS from [SketchApp](https://sketchapp.com/) using
 [PostCSS](https://github.com/postcss/postcss).
 
+## TL;DR
+[![PostCSS-Sketch demonstration](https://img.youtube.com/vi/tCx5az-QR5M/0.jpg)](https://www.youtube.com/watch?v=tCx5az-QR5M)
+
 ## Currently Supported Sketch Attributes
 
 - textStyles

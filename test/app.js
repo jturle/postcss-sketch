@@ -11,10 +11,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <div className="topBar">Hello</div>
                 <div className="container">
                     <h1>PostCSS Sketch Plugin</h1>
-                    <h2>What is Lorem Ipsum?</h2>
+                    <h2>Updates in real-time</h2>
                     <p>
                         Lorem Ipsum is simply dummy text of the printing and
                         typesetting industry. Lorem Ipsum has been the
@@ -27,20 +26,13 @@ class App extends React.Component {
                         centuries,
                         but also the leap into electronic typesetting,
                         remaining
-                        essentially unchanged. It was popularised in the
-                        1960s with
-                        the release of Letraset sheets containing Lorem
-                        Ipsum
-                        passages, and more recently with desktop publishing
-                        software
-                        like Aldus PageMaker including versions of Lorem
-                        Ipsum.
+                        essentially unchanged.
                         From{' '}
                         <a href="http://lipsum.lipsum.com/">
                             lipsum.lipsum.com
                         </a>
                     </p>
-                    <div className={styles.sharedStyle}>
+                    <div className="sharedStyle">
                         Complex Shared Style Test, featuring fills, border
                         and
                         shadow.
