@@ -19,7 +19,7 @@ module.exports = plugin('postcss-sketch', opts => {
         {
             debugMode: false,
             noCache: false,
-            cssModulesMode: true
+            cssModulesMode: false
         },
         opts || {}
     );
