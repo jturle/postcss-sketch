@@ -20,7 +20,7 @@
 
     ]
   },
-  "currentPageIndex" : 3,
+  "currentPageIndex" : 0,
   "foreignSymbols" : [
 
   ],
@@ -14906,7 +14906,7 @@
           "resizingType" : 0,
           "<class>" : "MSLayerGroup",
           "isLocked" : 0,
-          "layerListExpandedType" : 2,
+          "layerListExpandedType" : 1,
           "nameIsFixed" : 1,
           "name" : "Font"
         },
@@ -15272,7 +15272,7 @@
             ]
           },
           "hasBackgroundColor" : 0,
-          "layerListExpandedType" : 2,
+          "layerListExpandedType" : 1,
           "resizesContent" : 0,
           "backgroundColor" : {
             "<class>" : "MSColor",
@@ -33147,6 +33147,222 @@
           "shouldBreakMaskChain" : 0,
           "resizingConstraint" : 63,
           "includeBackgroundColorInExport" : 1
+        },
+        {
+          "isFlippedHorizontal" : 0,
+          "objectID" : "A846629B-FD41-4F04-B390-6AF1C0005AE2",
+          "rotation" : 0,
+          "frame" : {
+            "y" : 784,
+            "<class>" : "MSRect",
+            "constrainProportions" : 0,
+            "height" : 27,
+            "width" : 180,
+            "x" : -85
+          },
+          "glyphBounds" : {
+            "y" : 0,
+            "x" : 0,
+            "width" : 178,
+            "height" : 22
+          },
+          "layerListExpandedType" : 0,
+          "exportOptions" : {
+            "shouldTrim" : 0,
+            "<class>" : "MSExportOptions",
+            "includedLayerIds" : [
+
+            ],
+            "layerOptions" : 0,
+            "exportFormats" : [
+
+            ]
+          },
+          "style" : {
+            "startDecorationType" : 0,
+            "sharedObjectID" : "A9DAD6DE-7F6C-4A4C-8BF9-208833E64B10",
+            "textStyle" : {
+              "NSColor" : {
+                "<class>" : "NSColor",
+                "color" : "rgba(0.000000,0.000000,0.000000,1.000000)"
+              },
+              "<class>" : "MSTextStyle",
+              "NSKern" : 0.8571429,
+              "MSAttributedStringTextTransformAttribute" : 1,
+              "NSFont" : {
+                "name" : "Open Sans",
+                "attributes" : {
+                  "NSFontSizeAttribute" : 20,
+                  "NSFontNameAttribute" : "OpenSans"
+                },
+                "family" : "Open Sans"
+              },
+              "NSParagraphStyle" : {
+                "<class>" : "NSMutableParagraphStyle",
+                "style" : {
+                  "headerLevel" : 0,
+                  "paragraphSpacing" : 0,
+                  "tabStops" : [
+                    28,
+                    56,
+                    84,
+                    112,
+                    140,
+                    168,
+                    196,
+                    224,
+                    252,
+                    280,
+                    308,
+                    336
+                  ],
+                  "headIndent" : 0,
+                  "lineBreakMode" : 0,
+                  "hyphenationFactor" : 0,
+                  "alignment" : 0,
+                  "paragraphSpacingBefore" : 0,
+                  "tailIndent" : 0,
+                  "firstLineHeadIndent" : 0,
+                  "minimumLineHeight" : 0,
+                  "lineSpacing" : 0,
+                  "maximumLineHeight" : 0,
+                  "lineHeightMultiple" : 0,
+                  "baseWritingDirection" : -1,
+                  "defaultTabInterval" : 0
+                }
+              }
+            },
+            "borderOptions" : {
+              "lineJoinStyle" : 0,
+              "<class>" : "MSStyleBorderOptions",
+              "isEnabled" : 0,
+              "lineCapStyle" : 0,
+              "dashPattern" : [
+
+              ]
+            },
+            "endDecorationType" : 0,
+            "contextSettings" : {
+              "<class>" : "MSGraphicsContextSettings",
+              "opacity" : 1,
+              "blendMode" : 0
+            },
+            "blur" : {
+              "radius" : 10,
+              "<class>" : "MSStyleBlur",
+              "motionAngle" : 0,
+              "isEnabled" : 0,
+              "type" : 0,
+              "center" : {
+                "x" : 0.5,
+                "y" : 0.5
+              }
+            },
+            "reflection" : {
+              "<class>" : "MSStyleReflection",
+              "strength" : 0.5,
+              "isEnabled" : 0,
+              "distance" : 1
+            },
+            "<class>" : "MSStyle",
+            "miterLimit" : 10,
+            "colorControls" : {
+              "hue" : 0,
+              "<class>" : "MSStyleColorControls",
+              "brightness" : 0,
+              "contrast" : 1,
+              "isEnabled" : 0,
+              "saturation" : 1
+            },
+            "fills" : [
+
+            ],
+            "borders" : [
+
+            ],
+            "innerShadows" : [
+
+            ],
+            "shadows" : [
+
+            ]
+          },
+          "heightIsClipped" : 0,
+          "lineSpacingBehaviour" : 2,
+          "dontSynchroniseWithSymbol" : 0,
+          "textBehaviour" : 0,
+          "isFlippedVertical" : 0,
+          "<class>" : "MSTextLayer",
+          "resizingType" : 0,
+          "isVisible" : 1,
+          "nameIsFixed" : 0,
+          "name" : "Type something",
+          "isLocked" : 0,
+          "attributedString" : {
+            "<class>" : "NSConcreteAttributedString",
+            "value" : {
+              "<class>" : "NSConcreteAttributedString",
+              "text" : "Type something",
+              "attributes" : [
+                {
+                  "NSKern" : 0.8571429,
+                  "NSFont" : {
+                    "name" : "Open Sans",
+                    "attributes" : {
+                      "NSFontSizeAttribute" : 20,
+                      "NSFontNameAttribute" : "OpenSans"
+                    },
+                    "family" : "Open Sans"
+                  },
+                  "length" : 14,
+                  "MSAttributedStringTextTransformAttribute" : 1,
+                  "location" : 0,
+                  "NSColor" : {
+                    "<class>" : "NSColor",
+                    "color" : "rgba(0.000000,0.000000,0.000000,1.000000)"
+                  },
+                  "text" : "Type something",
+                  "NSParagraphStyle" : {
+                    "<class>" : "NSMutableParagraphStyle",
+                    "style" : {
+                      "headerLevel" : 0,
+                      "paragraphSpacing" : 0,
+                      "tabStops" : [
+                        28,
+                        56,
+                        84,
+                        112,
+                        140,
+                        168,
+                        196,
+                        224,
+                        252,
+                        280,
+                        308,
+                        336
+                      ],
+                      "headIndent" : 0,
+                      "lineBreakMode" : 0,
+                      "hyphenationFactor" : 0,
+                      "alignment" : 0,
+                      "paragraphSpacingBefore" : 0,
+                      "tailIndent" : 0,
+                      "firstLineHeadIndent" : 0,
+                      "minimumLineHeight" : 0,
+                      "lineSpacing" : 0,
+                      "maximumLineHeight" : 0,
+                      "lineHeightMultiple" : 0,
+                      "baseWritingDirection" : -1,
+                      "defaultTabInterval" : 0
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "shouldBreakMaskChain" : 0,
+          "resizingConstraint" : 47,
+          "automaticallyDrawOnUnderlyingPath" : 0
         }
       ],
       "isVisible" : 1,
@@ -71150,21 +71366,6 @@
                           "style" : {
                             "startDecorationType" : 0,
                             "textStyle" : {
-                              "NSColor" : {
-                                "<class>" : "NSColor",
-                                "color" : "rgba(0.827451,0.345098,0.278431,1.000000)"
-                              },
-                              "<class>" : "MSTextStyle",
-                              "NSUnderline" : 0,
-                              "NSStrikethrough" : 1,
-                              "NSFont" : {
-                                "name" : "Roboto Medium",
-                                "attributes" : {
-                                  "NSFontSizeAttribute" : 14,
-                                  "NSFontNameAttribute" : "Roboto-Medium"
-                                },
-                                "family" : "Roboto"
-                              },
                               "NSParagraphStyle" : {
                                 "<class>" : "NSParagraphStyle",
                                 "style" : {
@@ -71198,6 +71399,21 @@
                                   "baseWritingDirection" : -1,
                                   "defaultTabInterval" : 0
                                 }
+                              },
+                              "<class>" : "MSTextStyle",
+                              "NSStrikethrough" : 1,
+                              "NSUnderline" : 0,
+                              "NSFont" : {
+                                "name" : "Roboto Medium",
+                                "attributes" : {
+                                  "NSFontSizeAttribute" : 14,
+                                  "NSFontNameAttribute" : "Roboto-Medium"
+                                },
+                                "family" : "Roboto"
+                              },
+                              "NSColor" : {
+                                "<class>" : "NSColor",
+                                "color" : "rgba(0.827451,0.345098,0.278431,1.000000)"
                               }
                             },
                             "borderOptions" : {
@@ -93875,6 +94091,120 @@
         },
         "objectID" : "F239D914-5958-4831-92E5-CF164C5A8A3F",
         "name" : "Link"
+      },
+      {
+        "<class>" : "MSSharedStyle",
+        "value" : {
+          "startDecorationType" : 0,
+          "sharedObjectID" : "A9DAD6DE-7F6C-4A4C-8BF9-208833E64B10",
+          "textStyle" : {
+            "NSColor" : {
+              "<class>" : "NSColor",
+              "color" : "rgba(0.000000,0.000000,0.000000,1.000000)"
+            },
+            "<class>" : "MSTextStyle",
+            "NSKern" : 0.8571429,
+            "MSAttributedStringTextTransformAttribute" : 1,
+            "NSFont" : {
+              "name" : "Open Sans",
+              "attributes" : {
+                "NSFontSizeAttribute" : 20,
+                "NSFontNameAttribute" : "OpenSans"
+              },
+              "family" : "Open Sans"
+            },
+            "NSParagraphStyle" : {
+              "<class>" : "NSMutableParagraphStyle",
+              "style" : {
+                "headerLevel" : 0,
+                "paragraphSpacing" : 0,
+                "tabStops" : [
+                  28,
+                  56,
+                  84,
+                  112,
+                  140,
+                  168,
+                  196,
+                  224,
+                  252,
+                  280,
+                  308,
+                  336
+                ],
+                "headIndent" : 0,
+                "lineBreakMode" : 0,
+                "hyphenationFactor" : 0,
+                "alignment" : 0,
+                "paragraphSpacingBefore" : 0,
+                "tailIndent" : 0,
+                "firstLineHeadIndent" : 0,
+                "minimumLineHeight" : 0,
+                "lineSpacing" : 0,
+                "maximumLineHeight" : 0,
+                "lineHeightMultiple" : 0,
+                "baseWritingDirection" : -1,
+                "defaultTabInterval" : 0
+              }
+            }
+          },
+          "borderOptions" : {
+            "lineJoinStyle" : 0,
+            "<class>" : "MSStyleBorderOptions",
+            "isEnabled" : 0,
+            "lineCapStyle" : 0,
+            "dashPattern" : [
+
+            ]
+          },
+          "endDecorationType" : 0,
+          "contextSettings" : {
+            "<class>" : "MSGraphicsContextSettings",
+            "opacity" : 1,
+            "blendMode" : 0
+          },
+          "blur" : {
+            "radius" : 10,
+            "<class>" : "MSStyleBlur",
+            "motionAngle" : 0,
+            "isEnabled" : 0,
+            "type" : 0,
+            "center" : {
+              "x" : 0.5,
+              "y" : 0.5
+            }
+          },
+          "reflection" : {
+            "<class>" : "MSStyleReflection",
+            "strength" : 0.5,
+            "isEnabled" : 0,
+            "distance" : 1
+          },
+          "<class>" : "MSStyle",
+          "miterLimit" : 10,
+          "colorControls" : {
+            "hue" : 0,
+            "<class>" : "MSStyleColorControls",
+            "brightness" : 0,
+            "contrast" : 1,
+            "isEnabled" : 0,
+            "saturation" : 1
+          },
+          "fills" : [
+
+          ],
+          "borders" : [
+
+          ],
+          "innerShadows" : [
+
+          ],
+          "shadows" : [
+
+          ]
+        },
+        "objectID" : "A9DAD6DE-7F6C-4A4C-8BF9-208833E64B10",
+        "name" : "TextTransformStyle"
       }
     ]
   },

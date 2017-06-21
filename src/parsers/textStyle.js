@@ -66,6 +66,15 @@ export default textStyle => {
         if (alignment) rules.push({ prop: 'text-align', value: alignment });
     }
 
+    // TextTransform
+    if (textStyle.MSAttributedStringTextTransformAttribute)
+        rules.push({
+            prop: 'text-transform',
+            value: textStyle.MSAttributedStringTextTransformAttribute == 1
+                ? 'uppercase'
+                : 'lowercase'
+        });
+
     // Do the font color
     rules.push({
         prop: 'color',

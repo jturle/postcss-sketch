@@ -18,6 +18,13 @@ it('can load a Semi-Bold font from a textStyle', () => {
     );
 });
 
+it('can load a text-transformed style', () => {
+    return run(
+        "div { font: sketch('" + sketchRef + "').textStyle.TextTransformStyle; }",
+        "div { font-weight: 400; font-family: 'Open Sans'; font-size: 20px; text-transform: uppercase; color: rgba(0,0,0,1); }"
+    );
+});
+
 it('can load a another font style from a textStyle', () => {
     return run(
         "div { font: sketch('" + sketchRef + "').textStyle.Headline_2; }",
